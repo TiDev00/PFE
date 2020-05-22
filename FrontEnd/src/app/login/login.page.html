@@ -1,0 +1,30 @@
+<ion-content>
+    
+    <ion-grid>
+        
+        <ion-row class="ion-align-items-center">
+
+            <ion-col size="8" offset="2">
+                
+                <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+
+                    <div>
+                        <ion-item>
+                            <ion-input name="matricule" type="text" placeholder="Login" ngModel required></ion-input>
+                         </ion-item>
+                         <ion-item>
+                             <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+                        </ion-item>
+                    </div>
+
+                    <div>
+                        <ion-button type="submit" [disabled]="form.invalid" expand="block">Validate</ion-button>
+                    </div>
+
+                </form>
+            
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+</ion-content>
