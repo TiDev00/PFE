@@ -32,6 +32,6 @@ public class Application {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "applications_services")
-	private Collection<Application> services = new ArrayList<>();
+	private Collection<Group> services = new ArrayList<>();
 
 }
