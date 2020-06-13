@@ -14,51 +14,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import sn.sonatel.eai.models.Application;
-import sn.sonatel.eai.service.ApplicationService;
+import sn.sonatel.eai.models.Command;
+import sn.sonatel.eai.service.CommandService;
 
 @RestController
-@RequestMapping("/applications")
-public class ApplicationController {
+@RequestMapping("/commands")
+public class CommandController {
 	
 	@Autowired
-	private ApplicationService applicationService;
+	private CommandService commandService;
 	
 	
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Application createApplication(@RequestBody Application application){
-		return applicationService.createApplication(application);
+	public Command createCommand(@RequestBody Command command){
+		return commandService.createCommand(command);
 			
 	}
 	
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<Application> readApplications() {
-		return applicationService.readApplications();		
+	public List<Command> readCommands() {
+		return commandService.readCommands();		
 	}
 	
 	
 	
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Application readApplication(@PathVariable Long id) {
-		return applicationService.readApplication(id);		
+	public Command readCommand(@PathVariable Long id) {
+		return commandService.readCommand(id);		
 	}
 		
 	
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.OK)
-	public Application updateApplication(@RequestBody Application application){
-		return applicationService.updateApplication(application);		
+	public Command updateCommand(@RequestBody Command command){
+		return commandService.updateCommand(command);		
 	}	
 	
 
 	@DeleteMapping("/delete/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Application deleteApplication(@PathVariable Long id) {
-		return applicationService.deleteApplication(id);	
+	public Command deleteCommand(@PathVariable Long id) {
+		return commandService.deleteCommand(id);	
 	}
 
 }

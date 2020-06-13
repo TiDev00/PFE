@@ -22,7 +22,6 @@ export class LoginPage {
     .subscribe(
       Response=>{
         let jwtToken = Response.headers.get('authorization');
-        // console.log(jwtToken);
         this.authenticationService.saveToken(jwtToken);
         this.router.navigateByUrl('/applications')
       },

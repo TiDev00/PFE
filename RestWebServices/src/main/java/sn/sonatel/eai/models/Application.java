@@ -33,5 +33,12 @@ public class Application {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "applications_services")
 	private Collection<Group> services = new ArrayList<>();
-
+	
+	@ManyToMany
+	@JoinTable(name = "applications_servers")
+	private Collection<Server> servers = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "applications_commands")
+	private Collection<Command> commands = new ArrayList<>();
 }

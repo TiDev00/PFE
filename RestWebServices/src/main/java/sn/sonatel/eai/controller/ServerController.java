@@ -14,51 +14,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import sn.sonatel.eai.models.Application;
-import sn.sonatel.eai.service.ApplicationService;
+import sn.sonatel.eai.models.Server;
+import sn.sonatel.eai.service.ServerService;
 
 @RestController
-@RequestMapping("/applications")
-public class ApplicationController {
+@RequestMapping("/servers")
+public class ServerController {
 	
 	@Autowired
-	private ApplicationService applicationService;
+	private ServerService serverService;
 	
 	
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Application createApplication(@RequestBody Application application){
-		return applicationService.createApplication(application);
+	public Server createServer(@RequestBody Server server){
+		return serverService.createServer(server);
 			
 	}
 	
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<Application> readApplications() {
-		return applicationService.readApplications();		
+	public List<Server> readServers() {
+		return serverService.readServers();		
 	}
 	
 	
 	
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Application readApplication(@PathVariable Long id) {
-		return applicationService.readApplication(id);		
+	public Server readServer(@PathVariable Long id) {
+		return serverService.readServer(id);		
 	}
 		
 	
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.OK)
-	public Application updateApplication(@RequestBody Application application){
-		return applicationService.updateApplication(application);		
+	public Server updateServer(@RequestBody Server server){
+		return serverService.updateServer(server);		
 	}	
 	
 
 	@DeleteMapping("/delete/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Application deleteApplication(@PathVariable Long id) {
-		return applicationService.deleteApplication(id);	
+	public Server deleteServer(@PathVariable Long id) {
+		return serverService.deleteServer(id);	
 	}
 
 }

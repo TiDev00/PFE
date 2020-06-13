@@ -1,11 +1,13 @@
-<ion-header>
-  <ion-searchbar animated placeholder="Rechercher" showCancelButton="focus"></ion-searchbar>
+<ion-header no-border>
+  <ion-searchbar animated placeholder="Rechercher" 
+  showCancelButton="focus" (ionInput)="filter($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
+
   <ion-list>
-    <ion-item *ngFor="let a of applications">
-      <ion-label>{{a.appName}}</ion-label>
+    <ion-item *ngFor="let application of applications" (click)="onSelect(application)">
+      {{application.appName}}
     </ion-item>
   </ion-list>
 

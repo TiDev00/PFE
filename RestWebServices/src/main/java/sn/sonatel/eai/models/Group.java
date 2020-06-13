@@ -25,5 +25,4 @@ public class Group {
 	@Column
 	private String descService;
 
-
 }

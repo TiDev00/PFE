@@ -11,6 +11,5 @@ public interface ApplicationService {
 	Application readApplication(Long id);
 	List<Application> readApplications();
 	Application deleteApplication(Long id);
-	
 
 }

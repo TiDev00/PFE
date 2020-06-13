@@ -1,10 +1,30 @@
 package sn.sonatel.eai.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "servers")
 public class Server {
 
-	public int id_serveur;
-	public String nom_serveur;
-	public String ip_serveur;
-	public String os_serveur;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(unique = true)
+	private String serverName;
+	
+	@Column
+	private String ipServer;
+	
+	@Column
+	private String osServer;
+	
 }
