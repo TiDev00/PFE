@@ -29,15 +29,14 @@ public class LogController {
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Log createLog(@RequestBody Log log){
-		return logService.createLog(log);
-			
+		return logService.createLog(log);	
 	}
 	
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public List<Log> readLogs() {
-		return logService.readLogs();		
+		return logService.readLogs();	
 	}
 	
 	
@@ -59,7 +58,6 @@ public class LogController {
 	@ResponseStatus(HttpStatus.OK)
 	public Log deleteLog(@PathVariable Long id) {
 		return logService.deleteLog(id);
-		
 	}
 	
 }

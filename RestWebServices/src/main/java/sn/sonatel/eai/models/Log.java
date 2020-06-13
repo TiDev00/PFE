@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,7 +24,7 @@ public class Log {
 	@Column
 	private long idAction;
 	
-	@Column
+	@Column(updatable = false)
 	@CreationTimestamp
 	private Date date;
 	
@@ -36,10 +35,6 @@ public class Log {
 	private String metadonnees;
 	
 	@Column(unique = true)
-	private String ipUser;
-	
-	@OneToOne(mappedBy = "log")
-	private AppUser appUser;
-	
+	private String ipUser;	
 
 }
