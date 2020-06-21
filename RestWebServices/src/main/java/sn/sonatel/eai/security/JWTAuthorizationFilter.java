@@ -53,11 +53,11 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter{
 		       
 		        
 		        String username = decodedJWT.getSubject();
-		        List<String> services = decodedJWT.getClaims().get("services").asList(String.class);
+		        List<String> profiles = decodedJWT.getClaims().get("profiles").asList(String.class);
 		        
 		        
 		        Collection<GrantedAuthority> authorities = new ArrayList<>();
-		        services.forEach(sn -> authorities.add(new SimpleGrantedAuthority(sn)));
+		        profiles.forEach(sn -> authorities.add(new SimpleGrantedAuthority(sn)));
 				
 		        UsernamePasswordAuthenticationToken user =
 		                new UsernamePasswordAuthenticationToken(username, null, authorities);

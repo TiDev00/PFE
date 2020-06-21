@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { ServersResolveService } from './resolvers/servers-resolve.service';
+import { ProcessResolveService } from './resolvers/process-resolve.service';
 
 
 const routes: Routes = [
@@ -23,14 +23,9 @@ const routes: Routes = [
   {
     path: 'application/:id',
     resolve: {
-      application: ServersResolveService
+      application: ProcessResolveService
     },
-    loadChildren: () => import('./servers/servers.module').then( m => m.ServersPageModule), 
-  },
-  
-  {
-    path: 'commands',
-    loadChildren: () => import('./commands/commands.module').then( m => m.CommandsPageModule)
+    loadChildren: () => import('./process/process.module').then( m => m.ProcessPageModule)
   }
 ];
 

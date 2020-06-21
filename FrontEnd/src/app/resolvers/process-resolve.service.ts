@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServersResolveService implements Resolve<any>{
+export class ProcessResolveService implements Resolve<any>{
 
   constructor(private authenticationService:AuthenticationService) { }
 

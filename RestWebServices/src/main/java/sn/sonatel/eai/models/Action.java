@@ -1,8 +1,42 @@
 package sn.sonatel.eai.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Data;
+
+
+@Data
+@Entity
+@Table(name = "actions")
 public class Action {
 
-	public int id_action;
-	public String nom_action;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(unique = true)
+	private String actionName;
+	
+	@Column
+	private String descAction;
+	
+	
+	@ManyToOne
+	@JsonBackReference
+	private Process processes;
+	
+	@OneToMany(mappedBy = "actions")
+	private Collection<Command> commands = new ArrayList<>();
 }

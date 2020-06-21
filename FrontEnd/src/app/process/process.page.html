@@ -10,8 +10,10 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let servers of application.servers">
-      {{servers.serverName}}
+    <ion-item *ngFor="let processes of application.processes" (click)="showActionSheet()">
+      <ion-label>{{processes.processName}}</ion-label>
+
+      <ion-badge color="medium">{{processes.server.serverName}}</ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>

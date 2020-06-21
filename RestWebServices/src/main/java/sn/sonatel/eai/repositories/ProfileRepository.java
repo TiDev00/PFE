@@ -3,9 +3,9 @@ package sn.sonatel.eai.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import sn.sonatel.eai.models.Command;
+import sn.sonatel.eai.models.Profile;
 
 @Repository
-public interface CommandRepository extends JpaRepository<Command, Long>{
+public interface ProfileRepository extends JpaRepository<Profile, Long>{
 
 }

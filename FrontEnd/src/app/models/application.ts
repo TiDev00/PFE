@@ -1,13 +1,11 @@
 import { Group } from './group';
-import { Server } from 'http';
-import { Command } from './command';
+import { Process } from './process';
 
 export class Application {
 
     id: number;
     appName: string;
     descApp: string;
-    services: Group[];
-    servers: Server[];
-    commands: Command[]
+    services: Group;
+    processes: Process[];
 }

@@ -8,5 +8,4 @@ import sn.sonatel.eai.models.Group;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
 	
-	
 }

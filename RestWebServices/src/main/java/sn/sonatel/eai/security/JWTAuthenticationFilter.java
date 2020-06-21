@@ -59,13 +59,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			Authentication authResult) throws IOException, ServletException {
 		
 		 User user=(User)authResult.getPrincipal();
-	        List<String> services=new ArrayList<>();
-	        authResult.getAuthorities().forEach(a -> services.add(a.getAuthority()));
+	        List<String> profiles=new ArrayList<>();
+	        authResult.getAuthorities().forEach(a -> profiles.add(a.getAuthority()));
 	        
 	        String jwt= JWT.create()
 	                .withIssuer(request.getRequestURI())
 	                .withSubject(user.getUsername())
-	                .withArrayClaim("services",services.toArray(new String[services.size()]))
+	                .withArrayClaim("profiles",profiles.toArray(new String[profiles.size()]))
 	                .withExpiresAt(new Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
 	                .sign(Algorithm.HMAC256(SecurityConstants.SECRET));
 	        

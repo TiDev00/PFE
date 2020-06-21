@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,9 +47,11 @@ public class AppUser {
 	@OneToOne
 	private Log log;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "users_services")
-	private Collection<Group> services = new ArrayList<>();
+	@ManyToOne
+	private Group service;
 	
-
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "users_profiles")
+	private Collection<Profile> profiles = new ArrayList<>();
+	
 }

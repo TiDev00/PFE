@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CommandsPageRoutingModule } from './commands-routing.module';
+import { ProcessPageRoutingModule } from './process-routing.module';
 
-import { CommandsPage } from './commands.page';
+import { ProcessPage } from './process.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CommandsPageRoutingModule
+    ProcessPageRoutingModule
   ],
-  declarations: [CommandsPage]
+  declarations: [ProcessPage]
 })
-export class CommandsPageModule {}
+export class ProcessPageModule {}
