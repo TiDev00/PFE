@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class ApplicationsPage implements OnInit {
 
   applications;
+  searchbar = document.querySelector('ion-searchbar');
+  items = Array.from(document.querySelector('ion-item').children);
+  
 
   constructor(private authenticationService:AuthenticationService,
               private router:Router) {}
@@ -39,8 +42,10 @@ export class ApplicationsPage implements OnInit {
   }
 
   filter(event){
-    const val = event.target.value;
+    const val = event.target.value.toLowerCase();
     console.log(val);
   }
 
 }
+
+  
