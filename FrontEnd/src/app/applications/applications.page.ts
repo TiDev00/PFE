@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 
 
@@ -12,12 +13,11 @@ import { Router } from '@angular/router';
 export class ApplicationsPage implements OnInit {
 
   applications;
-  searchbar = document.querySelector('ion-searchbar');
-  items = Array.from(document.querySelector('ion-item').children);
+  
   
 
   constructor(private authenticationService:AuthenticationService,
-              private router:Router) {}
+              private router: Router, private apiService: ApiService) {}
   
   onLogout(){
     this.authenticationService.logout();
@@ -25,14 +25,10 @@ export class ApplicationsPage implements OnInit {
 
 
   ngOnInit() {
-    this.authenticationService.getApplications()
+    this.apiService.getApplications()
     .subscribe(
       data=>{
       this.applications=data
-      },
-
-      error=>{
-        this.onLogout()
       }
     )
   }

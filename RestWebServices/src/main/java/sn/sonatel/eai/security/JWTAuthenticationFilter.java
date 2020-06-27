@@ -68,10 +68,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	                .withArrayClaim("profiles",profiles.toArray(new String[profiles.size()]))
 	                .withExpiresAt(new Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
 	                .sign(Algorithm.HMAC256(SecurityConstants.SECRET));
+	       
+	        response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + jwt);
 	        
-	        response.addHeader(SecurityConstants.HEADER_STRING,SecurityConstants.TOKEN_PREFIX + jwt);
-		
-		
 	}
 
 }

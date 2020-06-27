@@ -6,7 +6,7 @@ import { ProcessResolveService } from './resolvers/process-resolve.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'applications',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
 

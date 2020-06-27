@@ -9,11 +9,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage'
 import { AuthenticationService } from './services/authentication.service';
 import { UtilsService } from './services/utils.service';
-
+import { HttpInterceptorService } from './services/http-interceptor.service';
 
 
 @NgModule({
@@ -31,6 +31,7 @@ import { UtilsService } from './services/utils.service';
     SplashScreen,
     AuthenticationService,
     UtilsService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
