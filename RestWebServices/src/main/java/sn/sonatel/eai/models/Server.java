@@ -27,4 +27,9 @@ public class Server {
 	@Column
 	private String osServer;
 	
+	@Column
+	private String login;
+	
+	@Column
+	private String password;
 }

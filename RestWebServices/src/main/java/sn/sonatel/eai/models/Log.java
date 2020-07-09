@@ -20,12 +20,8 @@ public class Log {
 	
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column
-	private long idAction;
 	
-	@Column(updatable = false)
-	@CreationTimestamp
+
 	private Date date;
 	
 	@Column
@@ -34,7 +30,13 @@ public class Log {
 	@Column
 	private String metadonnees;
 	
-	@Column(unique = true)
+	@Column
+	private String channel;
+	
+	@Column
+	private String action;
+	
+	@Column
 	private String ipUser;	
 
 }

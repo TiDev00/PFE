@@ -19,7 +19,7 @@ import sn.sonatel.eai.models.AppUser;
 import sn.sonatel.eai.service.AppUserService;
 
 @RestController 
-@RequestMapping("/users") //permet de mapper toutes les requetes contenues dans AppUserController a /appuser
+@RequestMapping("/users") //permet de mapper toutes les requetes contenues dans AppUserController a /users
 public class AppUserController {
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class AppUserController {
 	
 	//Creation d'un appuser
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public AppUser createAppUser(@RequestBody AppUser appuser){
 		return appuserService.createAppUser(appuser);		
@@ -51,7 +51,7 @@ public class AppUserController {
 	
 	//Update d'un appuser existant dans la base
 	
-	@PutMapping("/update")
+	@PutMapping("/{matricule}")
 	@ResponseStatus(HttpStatus.OK)
 	public AppUser updateAppUser(@RequestBody AppUser appuser){
 		return appuserService.updateAppUser(appuser);		
@@ -59,7 +59,7 @@ public class AppUserController {
 	
 	//Suppression d'un appuser dans la base
 	
-	@DeleteMapping("/delete/{matricule}")
+	@DeleteMapping("/{matricule}")
 	@ResponseStatus(HttpStatus.OK)
 	public AppUser deleteAppUser(@PathVariable String matricule) {
 		return appuserService.deleteAppUser(matricule);

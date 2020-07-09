@@ -25,7 +25,7 @@ public class CommandController {
 	private CommandService commandService;
 	
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Command createCommand(@RequestBody Command command){
 		return commandService.createCommand(command);
@@ -48,14 +48,14 @@ public class CommandController {
 	}
 		
 	
-	@PutMapping("/update")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Command updateCommand(@RequestBody Command command){
 		return commandService.updateCommand(command);		
 	}	
 	
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Command deleteCommand(@PathVariable Long id) {
 		return commandService.deleteCommand(id);	

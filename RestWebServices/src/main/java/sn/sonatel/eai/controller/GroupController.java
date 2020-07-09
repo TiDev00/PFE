@@ -24,7 +24,7 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Group createGroup(@RequestBody Group group){
 		return groupService.createGroup(group);
@@ -47,14 +47,14 @@ public class GroupController {
 		
 		
 
-	@PutMapping("/update")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Group updateGroup(@RequestBody Group group){
 		return groupService.updateGroup(group);		
 	}	
 	
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Group deleteGroup(@PathVariable Long id) {
 		return groupService.deleteGroup(id);

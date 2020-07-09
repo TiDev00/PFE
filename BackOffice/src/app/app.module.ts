@@ -6,7 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,15 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { PageNoteFoundComponent } from './page-note-found/page-note-found.component';
+import { HttpInterceptorService } from './services/http-interceptor.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationGuard } from './guards/authentication.guard';
+import { UserService } from './services/user.service';
+import { CreateUserComponent } from './user/create-user/create-user.component';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+
 
 
 @NgModule({
@@ -22,7 +31,11 @@ import { PageNoteFoundComponent } from './page-note-found/page-note-found.compon
     AppComponent,
     LoginComponent,
     HomeComponent,
-    PageNoteFoundComponent
+    PageNoteFoundComponent,
+    CreateUserComponent,
+    UpdateUserComponent,
+    UserDetailsComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +51,12 @@ import { PageNoteFoundComponent } from './page-note-found/page-note-found.compon
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    AuthenticationGuard,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

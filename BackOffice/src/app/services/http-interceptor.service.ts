@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -13,8 +12,7 @@ export class HttpInterceptorService implements HttpInterceptor{
 
   loaderToShow: any;
 
-  constructor(private authenticationService: AuthenticationService,
-              public loadingController: LoadingController) { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>>{
     let token = localStorage.getItem('token')
@@ -33,7 +31,7 @@ export class HttpInterceptorService implements HttpInterceptor{
           'content-type': 'application/json'
         }
       })
-    }
+    };
     
     request = request.clone({
       headers: request.headers.set('Accept', 'application/json')
@@ -61,6 +59,5 @@ export class HttpInterceptorService implements HttpInterceptor{
     this.authenticationService.logout();
     return throwError(error)
   }
-
 
 }

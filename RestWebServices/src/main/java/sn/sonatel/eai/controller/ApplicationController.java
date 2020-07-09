@@ -25,7 +25,7 @@ public class ApplicationController {
 	private ApplicationService applicationService;
 	
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Application createApplication(@RequestBody Application application){
 		return applicationService.createApplication(application);
@@ -48,14 +48,14 @@ public class ApplicationController {
 	}
 		
 	
-	@PutMapping("/update")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Application updateApplication(@RequestBody Application application){
 		return applicationService.updateApplication(application);		
 	}	
 	
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Application deleteApplication(@PathVariable Long id) {
 		return applicationService.deleteApplication(id);	

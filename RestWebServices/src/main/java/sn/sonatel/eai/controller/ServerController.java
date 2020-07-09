@@ -25,7 +25,7 @@ public class ServerController {
 	private ServerService serverService;
 	
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Server createServer(@RequestBody Server server){
 		return serverService.createServer(server);
@@ -48,14 +48,14 @@ public class ServerController {
 	}
 		
 	
-	@PutMapping("/update")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Server updateServer(@RequestBody Server server){
 		return serverService.updateServer(server);		
 	}	
 	
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Server deleteServer(@PathVariable Long id) {
 		return serverService.deleteServer(id);	

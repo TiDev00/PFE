@@ -25,7 +25,7 @@ public class ProfileController {
 	private ProfileService profileService;
 	
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Profile createProfile(@RequestBody Profile profile){
 		return profileService.createProfile(profile);
@@ -48,14 +48,14 @@ public class ProfileController {
 	}
 		
 	
-	@PutMapping("/update")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Profile updateProfile(@RequestBody Profile profile){
 		return profileService.updateProfile(profile);		
 	}	
 	
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Profile deleteProfile(@PathVariable Long id) {
 		return profileService.deleteProfile(id);	

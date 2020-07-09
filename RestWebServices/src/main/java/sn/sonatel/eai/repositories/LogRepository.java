@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import sn.sonatel.eai.models.Log;
 
-@Repository 
+@Repository
 public interface LogRepository extends JpaRepository<Log, Long> {
 	
 }

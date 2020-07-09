@@ -25,7 +25,7 @@ public class ProcessController {
 	private ProcessService processService;
 	
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Process createProcess(@RequestBody Process process){
 		return processService.createProcess(process);
@@ -48,14 +48,14 @@ public class ProcessController {
 	}
 		
 	
-	@PutMapping("/update")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Process updateProcess(@RequestBody Process process){
 		return processService.updateProcess(process);		
 	}	
 	
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Process deleteProcess(@PathVariable Long id) {
 		return processService.deleteProcess(id);	

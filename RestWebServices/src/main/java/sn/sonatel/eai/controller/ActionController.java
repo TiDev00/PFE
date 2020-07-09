@@ -25,7 +25,7 @@ public class ActionController {
 	private ActionService actionService;
 	
 	
-	@PostMapping("/add")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Action createAction(@RequestBody Action action){
 		return actionService.createAction(action);
@@ -48,14 +48,14 @@ public class ActionController {
 	}
 		
 	
-	@PutMapping("/update")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Action updateAction(@RequestBody Action action){
 		return actionService.updateAction(action);		
 	}	
 	
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Action deleteAction(@PathVariable Long id) {
 		return actionService.deleteAction(id);	

@@ -29,6 +29,17 @@ export class LoginComponent implements OnInit{
   onSubmit(){
     if(this.formGroup.valid){
       this.authenticationService.login(this.formGroup.value)
+      .subscribe(
+        Response=>{
+          let jwtToken = Response.headers.get('authorization');
+          this.authenticationService.saveToken(jwtToken);
+          this.router.navigateByUrl('/home')
+        },
+  
+        error=>{
+          alert("Bad credentials!")
+        }
+      )
     }
   }
 
