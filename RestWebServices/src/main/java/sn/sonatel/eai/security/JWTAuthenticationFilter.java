@@ -43,7 +43,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Resource
 	private LogService logService; 
 	
-	public static final Logger LOGGER = Logger.getLogger(JWTAuthenticationFilter.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(JWTAuthenticationFilter.class.getName());
 	
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
@@ -134,7 +134,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 			return true;
 
-		} catch (NamingException e) {
+		} 
+		catch (NamingException e) {
 
 			LOGGER.log(Level.SEVERE, "Utilisateur LDAP non trouve");
 

@@ -16,7 +16,7 @@ import sn.sonatel.eai.service.LogService;
 
 @Service
 @Transactional
-public class LogServiceImpl implements LogService{
+public class LogServiceImpl implements LogService {
 
 	@Autowired
 	private LogRepository logRepository; 

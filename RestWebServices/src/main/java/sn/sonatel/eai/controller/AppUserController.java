@@ -19,7 +19,8 @@ import sn.sonatel.eai.models.AppUser;
 import sn.sonatel.eai.service.AppUserService;
 
 @RestController 
-@RequestMapping("/users") //permet de mapper toutes les requetes contenues dans AppUserController a /users
+@RequestMapping("/users") 
+//permet de mapper toutes les requetes contenues dans AppUserController a /users
 public class AppUserController {
 	
 	@Autowired

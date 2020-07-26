@@ -27,11 +27,6 @@ public class Command {
 	@Column
 	private String descCommand;
 	
-	@Column
-	private String output;
-	
-	@Column
-	private String result;
 	
 	@ManyToOne
 	@JsonBackReference
