@@ -1,7 +1,13 @@
 package sn.sonatel.eai.service.impl;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -20,10 +26,32 @@ public class ServerServiceImpl implements ServerService {
 	@Autowired
 	private ServerRepository serverRepository; 
 	
+	private static final Logger LOGGER = Logger.getLogger(ServerServiceImpl.class.getName());
 	
 	
 	@Override
 	public Server createServer(Server server) {
+		
+		String filePath = "C:/Users/stg_cisse50339/Desktop/myfile.txt";
+		
+		String serverName = server.getServerName();
+		
+		String ipServer = server.getIpServer();
+		
+		String login = server.getLogin();
+		
+		String password = server.getPassword();
+		
+		try (PrintWriter writer = new PrintWriter(new BufferedWriter((new FileWriter(filePath, true))))){
+			writer.println();
+			writer.println("[" + serverName + "]");
+			writer.println(ipServer + " ansible_user=" + login + " ansible_password=" + password);
+		}
+		catch(IOException e) {
+			LOGGER.log(Level.WARNING, "Impossible to write in the inventory file");
+			throw new RuntimeException(e);
+		}
+		
 		return serverRepository.save(server);
 	}
 
