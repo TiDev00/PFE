@@ -13,7 +13,7 @@ import { UtilsService } from '../services/utils.service';
 export class PopOverComponent implements OnInit {
 
   process;
-  
+  response;
   
 
   constructor(private navParams: NavParams, 
@@ -27,13 +27,14 @@ export class PopOverComponent implements OnInit {
   }
 
   envoi(actions){
-    this.request.severName = this.process.server.serverName
+    this.request.serverName = this.process.server.serverName
     this.request.commandName = actions.commands.commandName
-    console.log(this.request)
+
     this.apiService.postCommand(this.request)
     .subscribe(
       data=>{
-      this.utils.presentToast("Task completed!",'success');
+        this.response = data
+        this.utils.presentToast("Task completed!",'success');
       },
 
       error=>{

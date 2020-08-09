@@ -1,4 +1,4 @@
 export class Requete {
-    severName: string;
+    serverName: string;
     commandName: string
 }
