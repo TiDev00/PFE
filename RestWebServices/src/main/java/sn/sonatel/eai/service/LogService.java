@@ -10,5 +10,4 @@ public interface LogService {
 	Log readLog(Long id);
 	List<Log> readLogs();
 	
-
 }

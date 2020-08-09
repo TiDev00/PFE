@@ -18,6 +18,8 @@ export class ApiService {
     return this.http.get(`${apiUrl}/applications/`+id)
   }
 
-  
+  postCommand(requete){
+    return this.http.post(`${apiUrl}/executecommand/`, requete)
+  }
 
 }
