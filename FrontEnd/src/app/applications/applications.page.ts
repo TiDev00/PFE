@@ -13,7 +13,7 @@ import { ApiService } from '../services/api.service';
 export class ApplicationsPage implements OnInit {
 
   applications;
-  
+  searchText: string;
   
 
   constructor(private authenticationService:AuthenticationService,
@@ -37,10 +37,7 @@ export class ApplicationsPage implements OnInit {
     this.router.navigateByUrl('/application/'+application.id)
   }
 
-  filter(event){
-    const val = event.target.value.toLowerCase();
-    console.log(val);
-  }
+  
 
 }
 

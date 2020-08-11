@@ -5,14 +5,14 @@
 
   <ion-toolbar>
     <ion-searchbar animated placeholder="Search" 
-    showCancelButton="focus" (ionInput)="filter($event)"></ion-searchbar>
+    showCancelButton="focus" [(ngModel)]="searchText"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let application of applications" (click)="onSelect(application)">
+    <ion-item *ngFor="let application of applications | appFilter:searchText" (click)="onSelect(application)">
       {{application.appName}}
     </ion-item>
   </ion-list>

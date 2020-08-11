@@ -15,9 +15,10 @@ import { AuthenticationService } from './services/authentication.service';
 import { UtilsService } from './services/utils.service';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { Requete } from './models/requete';
+import { AppFilterPipe } from './pipes/app-filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AppFilterPipe],
   entryComponents: [],
   imports: [
     BrowserModule, 

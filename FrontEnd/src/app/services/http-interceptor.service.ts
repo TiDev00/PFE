@@ -14,9 +14,19 @@ export class HttpInterceptorService implements HttpInterceptor{
   loaderToShow: any;
 
   constructor(private authenticationService: AuthenticationService,
-              public loadingController: LoadingController) { }
+              public loadingCtrl: LoadingController) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>>{
+    
+    this.loadingCtrl.getTop().then(hasloading => {
+      if(!hasloading){
+        this.loadingCtrl.create({
+          spinner: 'circular',
+          translucent: true
+        }).then(loading => loading.present())
+      }
+    });
+
     let token = localStorage.getItem('token')
 
     if (token) {
@@ -39,19 +49,36 @@ export class HttpInterceptorService implements HttpInterceptor{
       headers: request.headers.set('Accept', 'application/json')
     });
 
+
+
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           console.log('event--->>>', event);
         }
+        this.loadingCtrl.getTop().then(hasloading => {
+          if(hasloading){
+            this.loadingCtrl.dismiss();
+          }
+        });
         return event;
       }),
       
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
+          this.loadingCtrl.getTop().then(hasloading => {
+            if(hasloading){
+              this.loadingCtrl.dismiss();
+            }
+          });
           return this.handle403Error(error);
         } 
         
+        this.loadingCtrl.getTop().then(hasloading => {
+          if(hasloading){
+            this.loadingCtrl.dismiss();
+          }
+        });
         return throwError(error)
       })
     )

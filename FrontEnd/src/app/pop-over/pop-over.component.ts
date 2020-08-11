@@ -34,7 +34,7 @@ export class PopOverComponent implements OnInit {
     .subscribe(
       data=>{
         this.response = data
-        this.utils.presentToast("Task completed!",'success');
+        this.utils.presentToast("Task completed!",'success');        
       },
 
       error=>{
