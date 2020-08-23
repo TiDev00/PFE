@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.models.Requete;
+import sn.sonatel.eai.models.Reponse;
 import sn.sonatel.eai.service.ExecuteCommandService;
 
 @Service
@@ -21,7 +22,7 @@ public class ExecuteCommandServiceImpl implements ExecuteCommandService{
 	
 
 	@Override
-	public String commandExecutor(Requete requete) {
+	public Reponse commandExecutor(Requete requete) {
 		
 		boolean isWindows = System.getProperty("os.name")
                 .toLowerCase().startsWith("windows");
@@ -50,28 +51,41 @@ public class ExecuteCommandServiceImpl implements ExecuteCommandService{
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                LOGGER.log(Level.INFO, line);
-            }
-
+            
+            Reponse status = new Reponse();       
+            
             int exitCode = process.waitFor();
-
+            
+         
             if (exitCode == 0) {
-                LOGGER.log(Level.INFO, "Task executed successfully!");
+            	
+            	status.setMessage("OK");
+            	LOGGER.log(Level.INFO, "Task was executed successfully!");
+            	
+            	
+            	if(reader.ready()) {
+            		status.setOutput("Application is running");
+                    process.destroy();
+            		return status;   
+            	}
+            	
+            	status.setOutput("Application is stopped");
                 process.destroy();
-                return "OK";
+        		return status;		
             }
             else {
+            	status.setMessage("KO");
                 LOGGER.log(Level.WARNING, "Error during task execution!");
                 process.destroy();
-                return "KO";
+                return status;
             }
             
         }
         catch (IOException|InterruptedException e) {
+        	Reponse error = new Reponse();     
+        	error.setMessage("Task initialization issue");
         	LOGGER.log(Level.SEVERE, "Impossible to create the task");
-        	return "Task initialization issue";
+        	return error;
         }
         
 	}

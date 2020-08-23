@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import sn.sonatel.eai.models.Reponse;
 import sn.sonatel.eai.models.Requete;
 import sn.sonatel.eai.service.ExecuteCommandService;
 
@@ -21,7 +22,7 @@ public class ExcuteCommandController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
-	public String commandExecutor(@RequestBody Requete requete) {
+	public Reponse commandExecutor(@RequestBody Requete requete) {
 		return executecommandService.commandExecutor(requete);
 	}
 
