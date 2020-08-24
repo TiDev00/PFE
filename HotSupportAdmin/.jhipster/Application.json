@@ -1,0 +1,42 @@
+{
+  "name": "Application",
+  "fields": [
+    {
+      "fieldName": "appName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "descApp",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "process",
+      "otherEntityRelationshipName": "application",
+      "relationshipName": "processes"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "group",
+      "otherEntityRelationshipName": "applications",
+      "relationshipName": "service",
+      "otherEntityField": "serviceName"
+    }
+  ],
+  "changelogDate": "20200820211304",
+  "entityTableName": "application",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

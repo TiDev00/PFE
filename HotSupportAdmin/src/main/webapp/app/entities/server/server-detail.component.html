@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="server">
+            <h2><span>Server</span> {{ server.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Server Name</span></dt>
+                <dd>
+                    <span>{{ server.serverName }}</span>
+                </dd>
+                <dt><span>Ip Server</span></dt>
+                <dd>
+                    <span>{{ server.ipServer }}</span>
+                </dd>
+                <dt><span>Os Server</span></dt>
+                <dd>
+                    <span>{{ server.osServer }}</span>
+                </dd>
+                <dt><span>Login</span></dt>
+                <dd>
+                    <span>{{ server.login }}</span>
+                </dd>
+                <dt><span>Password</span></dt>
+                <dd>
+                    <span>{{ server.password }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/server', server.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

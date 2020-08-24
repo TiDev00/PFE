@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-command-heading">Create or edit a Command</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_commandName">Command Name</label>
+                    <input type="text" class="form-control" name="commandName" id="field_commandName"
+                           formControlName="commandName"/>
+                    <div *ngIf="editForm.get('commandName')!.invalid && (editForm.get('commandName')!.dirty || editForm.get('commandName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('commandName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_descCommand">Desc Command</label>
+                    <input type="text" class="form-control" name="descCommand" id="field_descCommand"
+                           formControlName="descCommand"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_actions">Actions</label>
+                    <select class="form-control" id="field_actions" name="actions" formControlName="actions">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="actionOption.id === editForm.get('actions')!.value?.id ? editForm.get('actions')!.value : actionOption" *ngFor="let actionOption of actions; trackBy: trackById">{{ actionOption.actionName }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

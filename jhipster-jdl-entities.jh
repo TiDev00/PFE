@@ -1,0 +1,62 @@
+
+entity Action {
+	actionName String required,
+    descAction String,
+}
+
+entity Application {
+	appName String required,
+    descApp String
+}
+
+entity Command {
+	commandName String required,
+	descCommand String,
+}
+
+entity Group {
+	serviceName String required,
+    descService String
+}
+
+entity Process {
+	processName String required,
+	descProcess String
+}
+
+entity Server {
+	serverName String required,
+	ipServer String required,
+	osServer String,
+	login String required,
+	password String required,
+}
+
+
+relationship OneToMany {
+	Process{actions} to Action{process(processName)},
+    Group{applications} to Application{service(serviceName)},
+    Application{processes} to Process{application(appName)},
+    Server{processes} to Process{server(serverName)}
+}
+
+
+
+
+
+// Set pagination options
+paginate Action with pagination
+paginate Application with pagination
+paginate Command with pagination
+paginate Group with pagination
+paginate Server with pagination
+paginate Process with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

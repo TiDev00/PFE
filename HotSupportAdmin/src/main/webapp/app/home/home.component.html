@@ -1,0 +1,26 @@
+<div class="row">
+
+
+    <div class="col-md-9">
+        <h1 class="display-4">Hot Support Administration</h1>
+
+        <p class="lead">This is your Web Administrative Plateform</p>
+
+        <div [ngSwitch]="isAuthenticated()">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
+            </div>
+
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>If you want to </span>
+                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="null") <br/>- User (login="user" and password="null").</span>
+            </div>
+
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>Are you having issues to connect?  Please contact your administrator§</span>&nbsp;
+<!--                <a class="alert-link" >Please contact your administrator</a>-->
+            </div>
+        </div>
+
+    </div>
+</div>
