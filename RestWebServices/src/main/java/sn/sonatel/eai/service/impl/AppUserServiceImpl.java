@@ -24,6 +24,7 @@ public class AppUserServiceImpl implements AppUserService{
 	 *  or it is taken from the name-Parameter.
 	 * @Inject or @Autowired try to wire in a suitable other component by type.
 	 */
+	
 	@Autowired
 	private AppUserRepository appuserRepository; 
 	

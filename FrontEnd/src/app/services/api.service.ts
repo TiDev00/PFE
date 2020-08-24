@@ -22,4 +22,7 @@ export class ApiService {
     return this.http.post(`${apiUrl}/executecommand/`, requete)
   }
 
+  getUser(matricule){
+    return this.http.get(`${apiUrl}/users/`+matricule)
+  }
 }

@@ -60,19 +60,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		try {
 			AppUser appUser = new ObjectMapper().readValue(request.getInputStream(), AppUser.class);
 			
-		
-			/*
-			 * log.setAction("LOGIN"); log.setChannel("NULL"); log.setDate(new Date());
-			 * log.setIpUser("192.168.1.1"); log.setMetadonnees("NULL");
-			 * log.setOsMobile("NULL");
-			 */
-			
 			
 			if(!isMemberOfSonatel(appUser.getMatricule(), appUser.getPassword())) {
 				
-	//			appUser.setPassword("NULL");
-				
-	//			logService.createLog(log);
  				
 				return authenticationManager
 						.authenticate(
@@ -83,8 +73,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			
-	//		logService.createLog(log);
 			
 			throw new RuntimeException(e);
 		}

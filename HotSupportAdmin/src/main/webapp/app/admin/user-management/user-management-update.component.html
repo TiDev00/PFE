@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label class="form-control-label">Login</label>
                     <input type="text" class="form-control" name="login"
-                           formControlName="login" readonly>
+                           formControlName="login">
 
                     <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
                         <small class="form-text text-danger"
@@ -64,7 +64,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label">Email</label>
-                    <input type="email" class="form-control" name="email" formControlName="email" readonly>
+                    <input type="email" class="form-control" name="email" formControlName="email">
 
                     <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
                         <small class="form-text text-danger"
