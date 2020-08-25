@@ -1,3 +1,4 @@
+/*
 package sn.sonatel.dsi.eai.config;
 
 import sn.sonatel.dsi.eai.service.MailService;
@@ -22,3 +23,4 @@ public class NoOpMailConfiguration {
         return mockMailService;
     }
 }
+*/

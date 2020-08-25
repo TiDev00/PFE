@@ -22,7 +22,7 @@ export class ApplicationUpdateComponent implements OnInit {
     id: [],
     appName: [null, [Validators.required]],
     descApp: [],
-    service: [],
+    service: [null, Validators.required],
   });
 
   constructor(
@@ -36,7 +36,7 @@ export class ApplicationUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ application }) => {
       this.updateForm(application);
 
-      this.groupService.query().subscribe((res: HttpResponse<IGroup[]>) => (this.groups = res.body || []))
+      this.groupService.query().subscribe((res: HttpResponse<IGroup[]>) => (this.groups = res.body || []));
     });
   }
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ProcessResolveService } from './resolvers/process-resolve.service';
+import { UserResolveService } from './resolvers/user-resolve.service';
+import { ApplicationResolveService } from './resolvers/application-resolve.service';
 
 
 const routes: Routes = [
@@ -17,6 +19,10 @@ const routes: Routes = [
 
   {
     path: 'applications',
+    resolve: {
+      user: UserResolveService,
+      applications: ApplicationResolveService
+    },
     loadChildren: () => import('./applications/applications.module').then( m => m.ApplicationsPageModule)
   },
 

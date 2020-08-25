@@ -1,3 +1,4 @@
+/*
 package sn.sonatel.dsi.eai.service;
 
 import sn.sonatel.dsi.eai.domain.User;
@@ -20,11 +21,13 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
+*/
 /**
  * Service for sending emails.
  * <p>
  * We use the {@link Async} annotation to send emails asynchronously.
- */
+ *//*
+
 @Service
 public class MailService {
 
@@ -104,3 +107,4 @@ public class MailService {
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
     }
 }
+*/

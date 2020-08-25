@@ -4,7 +4,7 @@ import sn.sonatel.dsi.eai.config.Constants;
 import sn.sonatel.dsi.eai.domain.User;
 import sn.sonatel.dsi.eai.repository.UserRepository;
 import sn.sonatel.dsi.eai.security.AuthoritiesConstants;
-import sn.sonatel.dsi.eai.service.MailService;
+//import sn.sonatel.dsi.eai.service.MailService;
 import sn.sonatel.dsi.eai.service.UserService;
 import sn.sonatel.dsi.eai.service.dto.UserDTO;
 import sn.sonatel.dsi.eai.web.rest.errors.BadRequestAlertException;
@@ -69,12 +69,12 @@ public class UserResource {
 
     private final UserRepository userRepository;
 
-    private final MailService mailService;
+    //private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository/*, MailService mailService*/) {
         this.userService = userService;
         this.userRepository = userRepository;
-        this.mailService = mailService;
+        //this.mailService = mailService;
     }
 
     /**
@@ -103,7 +103,7 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
+            //mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert(applicationName,  "A user is created with identifier " + newUser.getLogin(), newUser.getLogin()))
                 .body(newUser);

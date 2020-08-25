@@ -35,7 +35,7 @@ entity Server {
 
 relationship OneToMany {
 	Process{actions} to Action{process(processName)},
-    Group{applications} to Application{service(serviceName)},
+    Group{applications} to Application{service(serviceName) required},
     Application{processes} to Process{application(appName)},
     Server{processes} to Process{server(serverName)}
 }

@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { ApplicationComponentsPage, ApplicationDeleteDialog, ApplicationUpdatePage } from './application.page-object';
+import {
+  ApplicationComponentsPage,
+  /* ApplicationDeleteDialog, */
+  ApplicationUpdatePage,
+} from './application.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('Application e2e test', () => {
   let signInPage: SignInPage;
   let applicationComponentsPage: ApplicationComponentsPage;
   let applicationUpdatePage: ApplicationUpdatePage;
-  let applicationDeleteDialog: ApplicationDeleteDialog;
+  /* let applicationDeleteDialog: ApplicationDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -38,36 +42,37 @@ describe('Application e2e test', () => {
     await applicationUpdatePage.cancel();
   });
 
-  it('should create and save Applications', async () => {
-    const nbButtonsBeforeCreate = await applicationComponentsPage.countDeleteButtons();
+  /* it('should create and save Applications', async () => {
+        const nbButtonsBeforeCreate = await applicationComponentsPage.countDeleteButtons();
 
-    await applicationComponentsPage.clickOnCreateButton();
+        await applicationComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      applicationUpdatePage.setAppNameInput('appName'),
-      applicationUpdatePage.setDescAppInput('descApp'),
-      applicationUpdatePage.serviceSelectLastOption(),
-    ]);
+        await promise.all([
+            applicationUpdatePage.setAppNameInput('appName'),
+            applicationUpdatePage.setDescAppInput('descApp'),
+            applicationUpdatePage.serviceSelectLastOption(),
+        ]);
 
-    expect(await applicationUpdatePage.getAppNameInput()).to.eq('appName', 'Expected AppName value to be equals to appName');
-    expect(await applicationUpdatePage.getDescAppInput()).to.eq('descApp', 'Expected DescApp value to be equals to descApp');
+        expect(await applicationUpdatePage.getAppNameInput()).to.eq('appName', 'Expected AppName value to be equals to appName');
+        expect(await applicationUpdatePage.getDescAppInput()).to.eq('descApp', 'Expected DescApp value to be equals to descApp');
 
-    await applicationUpdatePage.save();
-    expect(await applicationUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await applicationUpdatePage.save();
+        expect(await applicationUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await applicationComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await applicationComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last Application', async () => {
-    const nbButtonsBeforeDelete = await applicationComponentsPage.countDeleteButtons();
-    await applicationComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last Application', async () => {
+        const nbButtonsBeforeDelete = await applicationComponentsPage.countDeleteButtons();
+        await applicationComponentsPage.clickOnLastDeleteButton();
 
-    applicationDeleteDialog = new ApplicationDeleteDialog();
-    expect(await applicationDeleteDialog.getDialogTitle()).to.eq('Are you sure you want to delete this Application?');
-    await applicationDeleteDialog.clickOnConfirmButton();
+        applicationDeleteDialog = new ApplicationDeleteDialog();
+        expect(await applicationDeleteDialog.getDialogTitle())
+            .to.eq('Are you sure you want to delete this Application?');
+        await applicationDeleteDialog.clickOnConfirmButton();
 
-    expect(await applicationComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await applicationComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

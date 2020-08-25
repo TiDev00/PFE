@@ -4,6 +4,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
+import { UtilsService } from './utils.service';
 
 
 @Injectable({
@@ -11,21 +12,12 @@ import { AuthenticationService } from './authentication.service';
 })
 export class HttpInterceptorService implements HttpInterceptor{
 
-  loaderToShow: any;
-
   constructor(private authenticationService: AuthenticationService,
-              public loadingCtrl: LoadingController) { }
+              private utils: UtilsService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>>{
     
-    this.loadingCtrl.getTop().then(hasloading => {
-      if(!hasloading){
-        this.loadingCtrl.create({
-          spinner: 'circular',
-          translucent: true
-        }).then(loading => loading.present())
-      }
-    });
+    this.utils.presentLoader();
 
     let token = localStorage.getItem('token')
 
@@ -56,29 +48,17 @@ export class HttpInterceptorService implements HttpInterceptor{
         if (event instanceof HttpResponse) {
           console.log('event--->>>', event);
         }
-        this.loadingCtrl.getTop().then(hasloading => {
-          if(hasloading){
-            this.loadingCtrl.dismiss();
-          }
-        });
+        this.utils.dismissLoader()
         return event;
       }),
       
       catchError((error: HttpErrorResponse) => {
+        this.utils.presentLoader()
         if (error.status === 403) {
-          this.loadingCtrl.getTop().then(hasloading => {
-            if(hasloading){
-              this.loadingCtrl.dismiss();
-            }
-          });
+          this.utils.dismissLoader()
           return this.handle403Error(error);
         } 
-        
-        this.loadingCtrl.getTop().then(hasloading => {
-          if(hasloading){
-            this.loadingCtrl.dismiss();
-          }
-        });
+        this.utils.dismissLoader()
         return throwError(error)
       })
     )

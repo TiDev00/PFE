@@ -35,7 +35,7 @@ export class UserManagementUpdateComponent implements OnInit {
     activated: [],
     langKey: [],
     authorities: [],
-    service: [],
+    service: [null, Validators.required],
   });
 
   constructor(private userService: UserService, private route: ActivatedRoute, private fb: FormBuilder,
@@ -50,9 +50,9 @@ export class UserManagementUpdateComponent implements OnInit {
         }
         this.updateForm(user);
       }
-    });
 
-    this.groupService.query().subscribe((res: HttpResponse<IGroup[]>) => (this.groups = res.body || []));
+      this.groupService.query().subscribe((res: HttpResponse<IGroup[]>) => (this.groups = res.body || []));
+    });
 
     this.userService.authorities().subscribe(authorities => {
       this.authorities = authorities;

@@ -13,5 +13,5 @@ export class AppFilterPipe implements PipeTransform {
 
     return apps.filter(item => item.appName.toLowerCase().includes(searchText.toLowerCase()));
   }
-
+  
 }

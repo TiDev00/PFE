@@ -2,6 +2,7 @@ package sn.sonatel.dsi.eai.web.rest;
 
 import sn.sonatel.dsi.eai.HotSupportAdminApp;
 import sn.sonatel.dsi.eai.domain.Application;
+import sn.sonatel.dsi.eai.domain.Group;
 import sn.sonatel.dsi.eai.repository.ApplicationRepository;
 import sn.sonatel.dsi.eai.service.ApplicationService;
 
@@ -60,6 +61,16 @@ public class ApplicationResourceIT {
         Application application = new Application()
             .appName(DEFAULT_APP_NAME)
             .descApp(DEFAULT_DESC_APP);
+        // Add required entity
+        Group group;
+        if (TestUtil.findAll(em, Group.class).isEmpty()) {
+            group = GroupResourceIT.createEntity(em);
+            em.persist(group);
+            em.flush();
+        } else {
+            group = TestUtil.findAll(em, Group.class).get(0);
+        }
+        application.setService(group);
         return application;
     }
     /**
@@ -72,6 +83,16 @@ public class ApplicationResourceIT {
         Application application = new Application()
             .appName(UPDATED_APP_NAME)
             .descApp(UPDATED_DESC_APP);
+        // Add required entity
+        Group group;
+        if (TestUtil.findAll(em, Group.class).isEmpty()) {
+            group = GroupResourceIT.createUpdatedEntity(em);
+            em.persist(group);
+            em.flush();
+        } else {
+            group = TestUtil.findAll(em, Group.class).get(0);
+        }
+        application.setService(group);
         return application;
     }
 

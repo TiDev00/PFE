@@ -51,7 +51,7 @@ public class UserService {
         this.cacheManager = cacheManager;
     }
 
-    public Optional<User> activateRegistration(String key) {
+    /*public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository.findOneByActivationKey(key)
             .map(user -> {
@@ -134,28 +134,30 @@ public class UserService {
         userRepository.flush();
         this.clearUserCaches(existingUser);
         return true;
-    }
+    }*/
 
     public User createUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setService(userDTO.getService());
-        /*if (userDTO.getEmail() != null) {
+        if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
-//        user.setImageUrl(userDTO.getImageUrl());
-        if (userDTO.getLangKey() == null) {
+        user.setLastName(userDTO.getLastName());
+        user.setService(userDTO.getService());
+        /*if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {
             user.setLangKey(userDTO.getLangKey());
         }
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());*/
-        user.setPassword("null");
-        /*user.setResetKey(RandomUtil.generateResetKey());*/
+        user.setImageUrl(userDTO.getImageUrl());
+        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+        user.setResetKey(RandomUtil.generateResetKey());
         user.setResetKey("null");
-//        user.setResetDate(Instant.now());
+        user.setResetDate(Instant.now());*/
+
+
+        user.setPassword("null");
         user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO.getAuthorities().stream()
@@ -222,10 +224,10 @@ public class UserService {
      * @param firstName first name of user.
      * @param lastName  last name of user.
      * @param email     email id of user.
-     * @param langKey   language key.
-     * @param imageUrl  image URL of user.
+     * //@param langKey   language key.
+     * //@param imageUrl  image URL of user.
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, Group service) {
+    public void updateUser(String firstName, String lastName, String email/*, String langKey, String imageUrl*/) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
@@ -234,15 +236,15 @@ public class UserService {
                 if (email != null) {
                     user.setEmail(email.toLowerCase());
                 }
-                user.setLangKey(langKey);
-                user.setImageUrl(imageUrl);
+                /*user.setLangKey(langKey);
+                user.setImageUrl(imageUrl);*/
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
             });
     }
 
 
-    @Transactional
+    /*@Transactional
     public void changePassword(String currentClearTextPassword, String newPassword) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
@@ -256,7 +258,7 @@ public class UserService {
                 this.clearUserCaches(user);
                 log.debug("Changed password for User: {}", user);
             });
-    }
+    }*/
 
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
@@ -278,7 +280,7 @@ public class UserService {
      * <p>
      * This is scheduled to get fired everyday, at 01:00 (am).
      */
-    @Scheduled(cron = "0 0 1 * * ?")
+    /*@Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         userRepository
             .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
@@ -287,7 +289,7 @@ public class UserService {
                 userRepository.delete(user);
                 this.clearUserCaches(user);
             });
-    }
+    }*/
 
     /**
      * Gets a list of all the authorities.

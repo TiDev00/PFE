@@ -35,19 +35,19 @@ public class UserDTO {
     @Size(min = 5, max = 254)
     private String email;
 
-
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "users", allowSetters = true)
     private Group service;
 
-
-    @Size(max = 256)
-    private String imageUrl;
-
     private boolean activated = false;
+
+   /* @Size(max = 256)
+    private String imageUrl;
 
     @Size(min = 2, max = 10)
     private String langKey;
-
+*/
     private String createdBy;
 
     private Instant createdDate;
@@ -70,8 +70,8 @@ public class UserDTO {
         this.email = user.getEmail();
         this.service = user.getService();
         this.activated = user.getActivated();
-        this.imageUrl = user.getImageUrl();
-        this.langKey = user.getLangKey();
+      /*  this.imageUrl = user.getImageUrl();
+        this.langKey = user.getLangKey();*/
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
@@ -129,14 +129,6 @@ public class UserDTO {
         this.service = group;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public boolean isActivated() {
         return activated;
     }
@@ -145,13 +137,21 @@ public class UserDTO {
         this.activated = activated;
     }
 
+   /* public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public String getLangKey() {
         return langKey;
     }
 
     public void setLangKey(String langKey) {
         this.langKey = langKey;
-    }
+    }*/
 
     public String getCreatedBy() {
         return createdBy;
@@ -201,9 +201,9 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
+           /* ", imageUrl='" + imageUrl + '\'' +
+            ", langKey='" + langKey + '\'' +*/
             ", activated=" + activated +
-            ", langKey='" + langKey + '\'' +
             ", createdBy=" + createdBy +
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +

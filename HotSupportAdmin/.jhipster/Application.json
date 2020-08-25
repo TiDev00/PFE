@@ -4,9 +4,7 @@
     {
       "fieldName": "appName",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "descApp",
@@ -21,11 +19,12 @@
       "relationshipName": "processes"
     },
     {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "group",
-      "otherEntityRelationshipName": "applications",
       "relationshipName": "service",
-      "otherEntityField": "serviceName"
+      "otherEntityName": "group",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "serviceName",
+      "otherEntityRelationshipName": "application"
     }
   ],
   "changelogDate": "20200820211304",
@@ -38,5 +37,7 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
 }

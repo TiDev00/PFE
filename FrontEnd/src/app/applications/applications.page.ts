@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Application } from '../models/application';
-import * as decoder from 'jwt-decode';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -15,12 +14,12 @@ export class ApplicationsPage implements OnInit {
 
   applications;
   user;
-  array: Application[];
+  app;
   searchText: string;
   
 
   constructor(private authenticationService:AuthenticationService,
-              private router: Router, private apiService: ApiService) {}
+              private router: Router, private route: ActivatedRoute) {}
   
   onLogout(){
     this.authenticationService.logout();
@@ -28,32 +27,18 @@ export class ApplicationsPage implements OnInit {
 
 
   ngOnInit() {
-    this.apiService.getApplications()
-    .subscribe(
-      data=>{
-      this.applications=this.restriction(data)
-      }
-    )
+    this.user = this.route.snapshot.data['user']
+    this.app = this.route.snapshot.data['applications']
+    this.applications = this.display(this.app, this.user.service.serviceName)
   }
 
   onSelect(application){
     this.router.navigateByUrl('/application/'+application.id)
   }
 
-  restriction(array){
-    let token = localStorage.getItem('token')
-    var decoded = decoder(token);
-    this.apiService.getUser(decoded.sub)
-    .subscribe(
-      data=>{
-        this.user=data
-      }
-    )
-    return array.filter((application) => {
-      return application.service.serviceName == 'EAI'
-    })
+  display(apps: Application[], service: string):Application[]{
+    return apps.filter(item => item.service.serviceName.includes(service));
   }
-
 }
 
   
