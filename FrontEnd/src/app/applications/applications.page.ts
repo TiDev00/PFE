@@ -37,7 +37,7 @@ export class ApplicationsPage implements OnInit {
   }
 
   display(apps: Application[], service: string):Application[]{
-    return apps.filter(item => item.service.serviceName.includes(service));
+    return apps.filter(item => item.service.serviceName == service);
   }
 }
 
