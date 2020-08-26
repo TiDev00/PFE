@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Application } from '../models/application';
-import { LoadingController } from '@ionic/angular';
+import { UtilsService } from '../services/utils.service';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: './applications.page.html',
   styleUrls: ['./applications.page.scss'],
 })
-export class ApplicationsPage implements OnInit {
+export class ApplicationsPage implements OnInit{
 
   applications;
   user;

@@ -17,7 +17,7 @@ export class UtilsService {
       message: message,
       position: 'top',
       color: color,
-      //duration: 2000
+      duration: 3000
     })
     toast.present();
   }
@@ -30,9 +30,9 @@ export class UtilsService {
       // duration: 5000,
     }).then(a => {
       a.present().then(() => {
-        console.log('presented');
+        // console.log('presented');
         if (!this.isLoading) {
-          a.dismiss().then(() => console.log('abort presenting'));
+          a.dismiss()/* .then(() => console.log('abort presenting')) */;
         }
       });
     });
@@ -40,6 +40,6 @@ export class UtilsService {
 
   async dismissLoader() {
     this.isLoading = false;
-    return await this.loadingController.dismiss().then(() => console.log('dismissed'));
-  }
+    return await this.loadingController.dismiss()/* .then(() => console.log('dismissed')) */;
+  } 
 }

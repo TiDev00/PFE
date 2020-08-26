@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Reponse {
 	
-	private String message;
+	private String traitement;
 	
 	private String output;
 

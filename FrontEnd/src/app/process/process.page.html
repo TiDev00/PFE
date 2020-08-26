@@ -12,7 +12,6 @@
   <ion-list>
     <ion-item *ngFor="let processes of application.processes" (click)="showPopOver(processes)">
       <ion-label>{{processes.processName}}</ion-label>
-
       <ion-badge color="medium">{{processes.server.serverName}}</ion-badge>
     </ion-item>
   </ion-list>

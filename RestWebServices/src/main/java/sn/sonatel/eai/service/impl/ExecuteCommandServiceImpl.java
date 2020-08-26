@@ -29,6 +29,7 @@ public class ExecuteCommandServiceImpl implements ExecuteCommandService{
 		
 		String serverName = requete.getServerName();
 		String commandName = requete.getCommandName();
+		String forstatus = requete.getForStatus();
 
 		//String ansibleCmd = "ansible " + serverName + " -m shell -a '" + commandName + "'";
 
@@ -52,38 +53,42 @@ public class ExecuteCommandServiceImpl implements ExecuteCommandService{
                     new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             
-            Reponse status = new Reponse();       
+            Reponse response = new Reponse();       
             
             int exitCode = process.waitFor();
             
          
             if (exitCode == 0) {
             	
-            	status.setMessage("OK");
-            	LOGGER.log(Level.INFO, "Task was executed successfully!");
+            	response.setTraitement("OK");
             	
-            	
-            	if(reader.ready()) {
-            		status.setOutput("Application is running");
+            	if (forstatus.contentEquals("YES") && reader.ready()) {
+                	response.setOutput("1");
                     process.destroy();
-            		return status;   
+                	return response;                   		
             	}
             	
-            	status.setOutput("Application is stopped");
-                process.destroy();
-        		return status;		
+            	if (forstatus.contentEquals("YES") && !reader.ready()) {
+            		response.setOutput("2");
+                    process.destroy();
+            		return response;	
+            	}
+            	
+            	LOGGER.log(Level.INFO, "Task was executed successfully!");
+            	return response;
             }
+            
             else {
-            	status.setMessage("KO");
+            	response.setTraitement("KO");
                 LOGGER.log(Level.WARNING, "Error during task execution!");
                 process.destroy();
-                return status;
+                return response;
             }
             
         }
         catch (IOException|InterruptedException e) {
         	Reponse error = new Reponse();     
-        	error.setMessage("Task initialization issue");
+        	error.setTraitement("Task initialization issue");
         	LOGGER.log(Level.SEVERE, "Impossible to create the task");
         	return error;
         }

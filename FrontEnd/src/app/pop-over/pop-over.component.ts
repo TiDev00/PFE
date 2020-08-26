@@ -29,16 +29,30 @@ export class PopOverComponent implements OnInit {
   envoi(actions){
     this.request.serverName = this.process.server.serverName
     this.request.commandName = actions.commands.commandName
+    this.request.Status = actions.commands.forStatus
 
     this.apiService.postCommand(this.request)
     .subscribe(
       data=>{
         this.response = data
-        this.utils.presentToast("Task completed!",'success');        
+        if (this.response.output === null){
+          if (this.response.traitement === 'OK'){
+            this.utils.presentToast("Task successfully completed",'success')
+          }
+          this.utils.presentToast("Unable to complete task", 'warning')
+        }
+
+        if (this.response.output === '1'){
+          this.utils.presentToast("Application is running",'light'); 
+        }
+
+        if (this.response.output ==='2'){
+          this.utils.presentToast("Application is stopped",'dark')
+        }
       },
 
       error=>{
-        this.utils.presentToast("Something went wrong!",'danger');
+        this.utils.presentToast("Error in servor",'danger');
       }
     )
   }

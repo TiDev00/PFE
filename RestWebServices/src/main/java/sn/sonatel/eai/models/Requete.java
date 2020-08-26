@@ -10,4 +10,6 @@ public class Requete {
 	private String serverName;
 	
 	private String commandName;
+	
+	private String forStatus;
 }
