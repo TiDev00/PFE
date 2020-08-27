@@ -20,10 +20,10 @@ export class ApiService {
   }
 
   postCommand(requete){
-    return this.http.post(`${apiUrl}/executecommand/`, requete)
+    return this.http.post(`${apiUrl}/executecommand`, requete)
   }
 
-  getUser(matricule){
-    return this.http.get(`${apiUrl}/users/`+matricule)
+  getUser(login){
+    return this.http.get(`${apiUrl}/users/`+login)
   }
 }

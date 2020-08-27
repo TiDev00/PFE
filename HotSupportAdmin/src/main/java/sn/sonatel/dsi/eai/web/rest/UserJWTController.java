@@ -44,10 +44,10 @@ public class UserJWTController {
     @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
 
-        if (isMemberOfSonatel(loginVM.getUsername(), loginVM.getPassword())){
+        if (!isMemberOfSonatel(loginVM.getUsername(), loginVM.getPassword())){
 
             UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginVM.getUsername(), /*loginVM.getPassword()*/"null");
+                new UsernamePasswordAuthenticationToken(loginVM.getUsername(), loginVM.getPassword()/*"null"*/);
 
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
