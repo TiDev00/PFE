@@ -22,6 +22,9 @@
             <column name="desc_command" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="for_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="actions_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_command_actions_id" />
             </column>
@@ -50,6 +53,7 @@
             <column name="id" type="numeric"/>
             <column name="command_name" type="string"/>
             <column name="desc_command" type="string"/>
+            <column name="for_status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -23,6 +23,7 @@ export class CommandUpdateComponent implements OnInit {
     id: [],
     commandName: [null, [Validators.required]],
     descCommand: [],
+    forStatus: [null, [Validators.required]],
     actions: [],
   });
 
@@ -66,6 +67,7 @@ export class CommandUpdateComponent implements OnInit {
       id: command.id,
       commandName: command.commandName,
       descCommand: command.descCommand,
+      forStatus: command.forStatus,
       actions: command.actions,
     });
   }
@@ -90,6 +92,7 @@ export class CommandUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       commandName: this.editForm.get(['commandName'])!.value,
       descCommand: this.editForm.get(['descCommand'])!.value,
+      forStatus: this.editForm.get(['forStatus'])!.value,
       actions: this.editForm.get(['actions'])!.value,
     };
   }

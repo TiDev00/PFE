@@ -9,6 +9,12 @@
     {
       "fieldName": "descCommand",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "forStatus",
+      "fieldType": "StatusType",
+      "fieldValues": "YES,NO",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [

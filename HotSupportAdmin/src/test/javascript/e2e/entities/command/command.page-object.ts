@@ -31,6 +31,7 @@ export class CommandUpdatePage {
 
   commandNameInput = element(by.id('field_commandName'));
   descCommandInput = element(by.id('field_descCommand'));
+  forStatusSelect = element(by.id('field_forStatus'));
 
   actionsSelect = element(by.id('field_actions'));
 
@@ -52,6 +53,18 @@ export class CommandUpdatePage {
 
   async getDescCommandInput(): Promise<string> {
     return await this.descCommandInput.getAttribute('value');
+  }
+
+  async setForStatusSelect(forStatus: string): Promise<void> {
+    await this.forStatusSelect.sendKeys(forStatus);
+  }
+
+  async getForStatusSelect(): Promise<string> {
+    return await this.forStatusSelect.element(by.css('option:checked')).getText();
+  }
+
+  async forStatusSelectLastOption(): Promise<void> {
+    await this.forStatusSelect.all(by.tagName('option')).last().click();
   }
 
   async actionsSelectLastOption(): Promise<void> {

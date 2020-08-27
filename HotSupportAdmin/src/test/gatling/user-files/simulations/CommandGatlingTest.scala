@@ -74,6 +74,7 @@ class CommandGatlingTest extends Simulation {
                 "id":null
                 , "commandName":"SAMPLE_TEXT"
                 , "descCommand":"SAMPLE_TEXT"
+                , "forStatus":"YES"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_command_url"))).exitHereIfFailed

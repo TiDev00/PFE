@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import sn.sonatel.dsi.eai.domain.enumeration.StatusType;
 /**
  * Integration tests for the {@link CommandResource} REST controller.
  */
@@ -35,6 +36,9 @@ public class CommandResourceIT {
 
     private static final String DEFAULT_DESC_COMMAND = "AAAAAAAAAA";
     private static final String UPDATED_DESC_COMMAND = "BBBBBBBBBB";
+
+    private static final StatusType DEFAULT_FOR_STATUS = StatusType.YES;
+    private static final StatusType UPDATED_FOR_STATUS = StatusType.NO;
 
     @Autowired
     private CommandRepository commandRepository;
@@ -59,7 +63,8 @@ public class CommandResourceIT {
     public static Command createEntity(EntityManager em) {
         Command command = new Command()
             .commandName(DEFAULT_COMMAND_NAME)
-            .descCommand(DEFAULT_DESC_COMMAND);
+            .descCommand(DEFAULT_DESC_COMMAND)
+            .forStatus(DEFAULT_FOR_STATUS);
         return command;
     }
     /**
@@ -71,7 +76,8 @@ public class CommandResourceIT {
     public static Command createUpdatedEntity(EntityManager em) {
         Command command = new Command()
             .commandName(UPDATED_COMMAND_NAME)
-            .descCommand(UPDATED_DESC_COMMAND);
+            .descCommand(UPDATED_DESC_COMMAND)
+            .forStatus(UPDATED_FOR_STATUS);
         return command;
     }
 
@@ -96,6 +102,7 @@ public class CommandResourceIT {
         Command testCommand = commandList.get(commandList.size() - 1);
         assertThat(testCommand.getCommandName()).isEqualTo(DEFAULT_COMMAND_NAME);
         assertThat(testCommand.getDescCommand()).isEqualTo(DEFAULT_DESC_COMMAND);
+        assertThat(testCommand.getForStatus()).isEqualTo(DEFAULT_FOR_STATUS);
     }
 
     @Test
@@ -139,6 +146,25 @@ public class CommandResourceIT {
 
     @Test
     @Transactional
+    public void checkForStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = commandRepository.findAll().size();
+        // set the field null
+        command.setForStatus(null);
+
+        // Create the Command, which fails.
+
+
+        restCommandMockMvc.perform(post("/api/commands")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(command)))
+            .andExpect(status().isBadRequest());
+
+        List<Command> commandList = commandRepository.findAll();
+        assertThat(commandList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllCommands() throws Exception {
         // Initialize the database
         commandRepository.saveAndFlush(command);
@@ -149,7 +175,8 @@ public class CommandResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(command.getId().intValue())))
             .andExpect(jsonPath("$.[*].commandName").value(hasItem(DEFAULT_COMMAND_NAME)))
-            .andExpect(jsonPath("$.[*].descCommand").value(hasItem(DEFAULT_DESC_COMMAND)));
+            .andExpect(jsonPath("$.[*].descCommand").value(hasItem(DEFAULT_DESC_COMMAND)))
+            .andExpect(jsonPath("$.[*].forStatus").value(hasItem(DEFAULT_FOR_STATUS.toString())));
     }
     
     @Test
@@ -164,7 +191,8 @@ public class CommandResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(command.getId().intValue()))
             .andExpect(jsonPath("$.commandName").value(DEFAULT_COMMAND_NAME))
-            .andExpect(jsonPath("$.descCommand").value(DEFAULT_DESC_COMMAND));
+            .andExpect(jsonPath("$.descCommand").value(DEFAULT_DESC_COMMAND))
+            .andExpect(jsonPath("$.forStatus").value(DEFAULT_FOR_STATUS.toString()));
     }
     @Test
     @Transactional
@@ -188,7 +216,8 @@ public class CommandResourceIT {
         em.detach(updatedCommand);
         updatedCommand
             .commandName(UPDATED_COMMAND_NAME)
-            .descCommand(UPDATED_DESC_COMMAND);
+            .descCommand(UPDATED_DESC_COMMAND)
+            .forStatus(UPDATED_FOR_STATUS);
 
         restCommandMockMvc.perform(put("/api/commands")
             .contentType(MediaType.APPLICATION_JSON)
@@ -201,6 +230,7 @@ public class CommandResourceIT {
         Command testCommand = commandList.get(commandList.size() - 1);
         assertThat(testCommand.getCommandName()).isEqualTo(UPDATED_COMMAND_NAME);
         assertThat(testCommand.getDescCommand()).isEqualTo(UPDATED_DESC_COMMAND);
+        assertThat(testCommand.getForStatus()).isEqualTo(UPDATED_FOR_STATUS);
     }
 
     @Test

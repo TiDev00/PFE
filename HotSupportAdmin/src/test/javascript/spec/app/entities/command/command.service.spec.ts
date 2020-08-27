@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CommandService } from 'app/entities/command/command.service';
 import { ICommand, Command } from 'app/shared/model/command.model';
+import { StatusType } from 'app/shared/model/enumerations/status-type.model';
 
 describe('Service Tests', () => {
   describe('Command Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(CommandService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Command(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Command(0, 'AAAAAAA', 'AAAAAAA', StatusType.YES);
     });
 
     describe('Service methods', () => {
@@ -56,6 +57,7 @@ describe('Service Tests', () => {
           {
             commandName: 'BBBBBB',
             descCommand: 'BBBBBB',
+            forStatus: 'BBBBBB',
           },
           elemDefault
         );
@@ -74,6 +76,7 @@ describe('Service Tests', () => {
           {
             commandName: 'BBBBBB',
             descCommand: 'BBBBBB',
+            forStatus: 'BBBBBB',
           },
           elemDefault
         );

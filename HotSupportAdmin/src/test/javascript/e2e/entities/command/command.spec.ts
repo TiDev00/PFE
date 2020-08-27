@@ -43,6 +43,7 @@ describe('Command e2e test', () => {
     await promise.all([
       commandUpdatePage.setCommandNameInput('commandName'),
       commandUpdatePage.setDescCommandInput('descCommand'),
+      commandUpdatePage.forStatusSelectLastOption(),
       commandUpdatePage.actionsSelectLastOption(),
     ]);
 

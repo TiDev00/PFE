@@ -25,6 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="commandName"><span>Command Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="descCommand"><span>Desc Command</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="forStatus"><span>For Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="actions.actionName"><span>Actions</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -34,6 +35,7 @@
                     <td><a [routerLink]="['/command', command.id, 'view']">{{ command.id }}</a></td>
                     <td>{{ command.commandName }}</td>
                     <td>{{ command.descCommand }}</td>
+                    <td>{{ command.forStatus }}</td>
                     <td>
                         <div *ngIf="command.actions">
                             <a [routerLink]="['/action', command.actions?.id, 'view']" >{{ command.actions?.actionName }}</a>

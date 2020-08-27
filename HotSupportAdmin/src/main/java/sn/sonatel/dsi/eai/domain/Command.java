@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
+import sn.sonatel.dsi.eai.domain.enumeration.StatusType;
+
 /**
  * A Command.
  */
@@ -28,6 +30,11 @@ public class Command implements Serializable {
 
     @Column(name = "desc_command")
     private String descCommand;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "for_status", nullable = false)
+    private StatusType forStatus;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -68,6 +75,19 @@ public class Command implements Serializable {
         this.descCommand = descCommand;
     }
 
+    public StatusType getForStatus() {
+        return forStatus;
+    }
+
+    public Command forStatus(StatusType forStatus) {
+        this.forStatus = forStatus;
+        return this;
+    }
+
+    public void setForStatus(StatusType forStatus) {
+        this.forStatus = forStatus;
+    }
+
     public Action getActions() {
         return actions;
     }
@@ -105,6 +125,7 @@ public class Command implements Serializable {
             "id=" + getId() +
             ", commandName='" + getCommandName() + "'" +
             ", descCommand='" + getDescCommand() + "'" +
+            ", forStatus='" + getForStatus() + "'" +
             "}";
     }
 }
