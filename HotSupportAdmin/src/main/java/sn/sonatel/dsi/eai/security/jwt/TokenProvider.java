@@ -5,9 +5,6 @@ import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import javax.naming.directory.InitialDirContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,34 +107,5 @@ public class TokenProvider {
             log.trace("Invalid JWT token trace.", e);
         }
         return false;
-    }
-
-    public boolean isMemberOfSonatel(String login, String password) {
-
-        try {
-
-            String urlLDAP = "Ldap://orange-sonatel.com/dc=orange-sonatel,dc=com";
-
-            Properties env = new Properties();
-
-            env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-            env.put(Context.PROVIDER_URL, urlLDAP);
-
-            env.put(Context.SECURITY_AUTHENTICATION, "simple");
-            env.put(Context.SECURITY_PRINCIPAL, login + "@orange-sonatel.com");
-            env.put(Context.SECURITY_CREDENTIALS, password);
-
-            new InitialDirContext(env);
-
-            return true;
-
-        }
-        catch (NamingException e) {
-
-            log.error("Utilisateur LDAP non trouve");
-            return false;
-
-        }
-
     }
 }
