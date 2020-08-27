@@ -157,7 +157,7 @@ public class UserService {
         user.setResetDate(Instant.now());*/
 
 
-        user.setPassword("null");
+        user.setPassword(passwordEncoder.encode("null"));
         user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO.getAuthorities().stream()
