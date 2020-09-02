@@ -1,0 +1,39 @@
+<ol class="breadcrumb float-right">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item active">Application</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Application Detail</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="application" #editForm="ngForm" (ngSubmit)="save()">
+    
+      <div class="form-group">
+        <label>Id</label>
+        {{application.id || 'n/a'}} 
+      </div>
+    
+      <div class="form-group">
+        <label for="appName">Name</label>
+        <input [(ngModel)]="application.appName" id="appName" name="appName" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="descApp">Description</label>
+        <input [(ngModel)]="application.descApp" id="descApp" name="descApp" class="form-control">
+      </div>
+    
+      <div class="form-group">
+        <label for="service">Service</label>
+        <select [(ngModel)]="application.service" id= "service" name="service" class="form-control" required>
+          <option *ngFor="let loaded of loadedServices" [ngValue]="loaded.id">{{loaded.serviceName}}</option>
+        </select>
+      </div>
+    
+      <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

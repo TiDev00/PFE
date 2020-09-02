@@ -9,7 +9,7 @@ public interface ProcessService {
 	Process createProcess(Process process);
 	Process updateProcess(Process process);
 	Process readProcess(Long id);
-	List<Process> readProcesses();
+	List<Process> readProcesses(String processName);
 	Process deleteProcess(Long id);
 
 }

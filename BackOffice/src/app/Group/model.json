@@ -1,0 +1,29 @@
+{ 
+    "title": "Group",
+    "entity": "Group",
+    "api": {
+      "url": "http://localhost:8081/services"
+    },
+    "filter": [
+      "serviceName"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "label": "Id",
+        "isId": true,
+        "readonly": true,
+        "type": "number"
+      },
+      {
+        "name": "serviceName",
+        "type": "string",
+        "label": "Service",
+      },
+	  {
+        "name": "descService",
+        "type": "string",
+        "label": "Description"
+      }
+    ]
+}

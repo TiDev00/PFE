@@ -15,7 +15,7 @@ export class AuthenticationService {
   constructor(private http:HttpClient, private router:Router) {  }
 
   login(user){
-    return this.http.post(`${apiUrl}/authenticate`,user, { observe: 'response' })
+    return this.http.post(`${apiUrl}/login`,user, { observe: 'response' })
   }
 
   

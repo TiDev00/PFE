@@ -9,7 +9,7 @@ public interface ActionService {
 	Action createAction(Action action);
 	Action updateAction(Action action);
 	Action readAction(Long id);
-	List<Action> readActions();
+	List<Action> readActions(String actionName);
 	Action deleteAction(Long id);
 
 }

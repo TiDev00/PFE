@@ -1,0 +1,39 @@
+{ 
+    "title": "Command",
+    "entity": "Command",
+    "api": {
+      "url": "http://localhost:8081/commands"
+    },
+    "filter": [
+      "commandName"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "label": "Id",
+        "isId": true,
+        "readonly": true,
+        "type": "number"
+      },
+      {
+        "name": "commandName",
+        "type": "string",
+        "label": "Command",
+      },
+      {
+        "name": "forStatus",
+        "type": "StatusType",
+        "label": "For Status"
+      },
+	  {
+        "name": "descCommand",
+        "type": "string",
+        "label": "Description"
+      },
+	  {
+        "name": "actions",
+        "type": "Action",
+        "label": "Action"
+      }
+    ]
+}

@@ -1,0 +1,40 @@
+
+<ol class="breadcrumb float-right">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item active">Action</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Action Detail</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="action" #editForm="ngForm" (ngSubmit)="save()">
+    
+      <div class="form-group">
+        <label>Id</label>
+        {{action.id || 'n/a'}} 
+      </div>
+    
+      <div class="form-group">
+        <label for="actionName">Action</label>
+        <input [(ngModel)]="action.actionName" id="actionName" name="actionName" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="descAction">Description</label>
+        <input [(ngModel)]="action.descAction" id="descAction" name="descAction" class="form-control">
+      </div>
+    
+      <div class="form-group">
+        <label for="processes">Process Owner</label>
+        <select [(ngModel)]="action.processes" id= "processes" name="processes" class="form-control" required>
+          <option *ngFor="let loaded of loadedProcesses" [ngValue]="loaded.id">{{loaded.processName}}</option>
+        </select>
+      </div>
+    
+      <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<ol class="breadcrumb float-right">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item active">Application</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Application List</h2>
+  </div>
+  <div class="content">
+    <form #f="ngForm">
+      
+      <div class="form-group">
+        <label for="appName">Name:</label>
+        <input [(ngModel)]="filter.appName" id="appName" name="appName" class="form-control">
+      </div>
+      
+      <button (click)="search()" [disabled]="!f?.valid" class="btn btn-primary">Search</button>
+      <a [routerLink]="['../applications', 'new' ]" class="btn btn-default">New</a>
+    </form>
+  </div>
+</div>
+<div class="card" *ngIf="applicationList.length > 0">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Name</th>
+          <th class="border-top-0" scope="col">Description</th>
+          <th class="border-top-0" scope="col">Service</th>
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of applicationList" [class.active]="item === selectedApplication">
+        
+          <td>{{item.id}}</td>
+          <td>{{item.appName}}</td>
+          <td>{{item.descApp}}</td>
+          <td>{{item.service.serviceName}}</td>
+         
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../applications', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

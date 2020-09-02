@@ -9,7 +9,7 @@ public interface ApplicationService {
 	Application createApplication(Application application);
 	Application updateApplication(Application application);
 	Application readApplication(Long id);
-	List<Application> readApplications();
+	List<Application> readApplications(String appName);
 	Application deleteApplication(Long id);
 
 }

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class Process {
 	@ManyToOne
 	private Server server;
 	
-	@OneToMany(mappedBy = "processes")
+	@OneToMany(mappedBy = "processes",fetch = FetchType.EAGER)
 	private Collection<Action> actions = new ArrayList<>();
 	
 }

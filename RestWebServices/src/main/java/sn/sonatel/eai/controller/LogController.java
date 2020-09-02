@@ -37,11 +37,4 @@ public class LogController {
 		return logService.readLogs();	
 	}
 	
-	
-	@GetMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	public Log readLog(@PathVariable Long id) {
-		return logService.readLog(id);		
-	}
-	
 }

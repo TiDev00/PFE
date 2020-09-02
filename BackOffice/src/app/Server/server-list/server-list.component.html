@@ -1,0 +1,54 @@
+<ol class="breadcrumb float-right">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item active">Server</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Server List</h2>
+  </div>
+  <div class="content">
+    <form #f="ngForm">
+      
+      <div class="form-group">
+        <label for="serverName">Server Name:</label>
+        <input [(ngModel)]="filter.serverName" id="serverName" name="serverName" class="form-control">
+      </div>
+      
+      <button (click)="search()" [disabled]="!f?.valid" class="btn btn-primary">Search</button>
+      <a [routerLink]="['../servers', 'new' ]" class="btn btn-default">New</a>
+    </form>
+  </div>
+</div>
+<div class="card" *ngIf="serverList.length > 0">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Server Name</th>
+          <th class="border-top-0" scope="col">IP Server</th>
+          <th class="border-top-0" scope="col">OS Server</th>
+          <th class="border-top-0" scope="col">Login</th>
+          <th class="border-top-0" scope="col">Password</th>
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of serverList" [class.active]="item === selectedServer">
+        
+          <td>{{item.id}}</td>
+          <td>{{item.serverName}}</td>
+          <td>{{item.ipServer}}</td>
+          <td>{{item.osServer}}</td>
+          <td>{{item.login}}</td>
+          <td>{{item.password}}</td>
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../servers', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.exceptions.ServerNotFoundException;
+import sn.sonatel.eai.models.Action;
 import sn.sonatel.eai.models.Server;
 import sn.sonatel.eai.repositories.ServerRepository;
 import sn.sonatel.eai.service.ServerService;
@@ -57,8 +59,13 @@ public class ServerServiceImpl implements ServerService {
 
 	
 	@Override
-	public List<Server> readServers() {
-		return serverRepository.findAll(Sort.by(Sort.Direction.ASC, "serverName"));
+	public List<Server> readServers(String serverName) {
+		if (serverName == null) {
+			return serverRepository.findAll(Sort.by(Sort.Direction.ASC, "serverName"));			
+		}
+		List<Server> servers = new ArrayList<>();
+		serverRepository.findByServerNameContaining(serverName).forEach(servers::add);
+		return servers;
 	}
 	
 

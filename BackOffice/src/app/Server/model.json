@@ -1,0 +1,44 @@
+{ 
+    "title": "Server",
+    "entity": "Server",
+    "api": {
+      "url": "http://localhost:8081/servers"
+    },
+    "filter": [
+      "serverName"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "label": "Id",
+        "isId": true,
+        "readonly": true,
+        "type": "number"
+      },
+      {
+        "name": "serverName",
+        "type": "string",
+        "label": "Server Name",
+      },
+	  {
+        "name": "ipServer",
+        "type": "string",
+        "label": "IP Server"
+      },
+	  {
+        "name": "osServer",
+        "type": "string",
+        "label": "OS Server"
+      },
+	  {
+        "name": "login",
+        "type": "string",
+        "label": "Login"
+      },
+	  {
+        "name": "password",
+        "type": "string",
+        "label": "Password"
+      }
+    ]
+}

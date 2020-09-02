@@ -1,0 +1,43 @@
+{ 
+    "title": "User",
+    "entity": "User",
+    "api": {
+      "url": "http://localhost:8081/users"
+    },
+    "filter": [
+      "matricule"
+    ],
+    "fields": [
+      {
+        "name": "matricule",
+        "label": "Matricule",
+        "isId": true,
+        "type": "string"
+      },
+      {
+        "name": "firstName",
+        "type": "string",
+        "label": "First Name"
+      },
+      {
+        "name": "lastName",
+        "type": "string",
+        "label": "LastName"
+      },
+	  {
+        "name": "email",
+        "type": "string",
+        "label": "Email"
+      },
+	  {
+        "name": "password",
+        "type": "string",
+        "label": "Password"
+      },
+      {
+        "name": "service",
+        "type": "Group",
+        "label": "Service",
+      }
+    ]
+}

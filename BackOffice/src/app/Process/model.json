@@ -1,0 +1,44 @@
+{ 
+    "title": "Process",
+    "entity": "Process",
+    "api": {
+      "url": "http://localhost:8081/processes"
+    },
+    "filter": [
+      "processName"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "label": "Id",
+        "isId": true,
+        "readonly": true,
+        "type": "number"
+      },
+	  {
+        "name": "processName",
+        "type": "string",
+        "label": "Process Name",
+      },
+      {
+        "name": "descProcess",
+        "type": "string",
+        "label": "Description",
+      },
+	  {
+        "name": "application",
+        "type": "Application",
+        "label": "Application"
+      },
+	  {
+        "name": "server",
+        "type": "Server",
+        "label": "Server"
+      },
+	  {
+        "name": "actions",
+        "type": "Action[]",
+        "label": "Actions"
+      }
+    ]
+}

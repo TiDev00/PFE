@@ -21,7 +21,7 @@ public class Server {
 	@Column(unique = true)
 	private String serverName;
 	
-	@Column
+	@Column(unique = true)
 	private String ipServer;
 	
 	@Column

@@ -1,6 +1,7 @@
 package sn.sonatel.eai.security;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,31 +50,39 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		this.authenticationManager = authenticationManager;
 	}
 
-
+	
+	
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		
-	//	Log log = new Log();
-	
+		//Log log = new Log();
 		
 		try {
 			AppUser appUser = new ObjectMapper().readValue(request.getInputStream(), AppUser.class);
 			
+			/*
+			 * log.setMatricule(appUser.getMatricule());
+			 * log.setAction("SUCCESSFUL_AUTHENTICATION"); 
+			 * log.setDate(LocalDateTime.now());
+			 * log.setChannel("test"); 
+			 * log.setMetadonnees("metadonnees");
+			 * log.setOsMobile(""); 
+			 * logService.createLog(log);
+			 */
 			
 			if(!isMemberOfSonatel(appUser.getMatricule(), appUser.getPassword())) {
 				
- 				
 				return authenticationManager
 						.authenticate(
 								new UsernamePasswordAuthenticationToken(appUser.getMatricule(), appUser.getPassword())
 								);
 			}
+			
 			throw new RuntimeException();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			
 			throw new RuntimeException(e);
 		}
 		
@@ -84,10 +93,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		
+		
 		 User user=(User)authResult.getPrincipal();
 	        List<String> profiles=new ArrayList<>();
 	        authResult.getAuthorities().forEach(a -> profiles.add(a.getAuthority()));
-	        
 	        
 	        
 	        String jwt= JWT.create()

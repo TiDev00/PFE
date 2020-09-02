@@ -9,7 +9,7 @@ public interface ServerService {
 	Server createServer(Server server);
 	Server updateServer(Server server);
 	Server readServer(Long id);
-	List<Server> readServers();
+	List<Server> readServers(String serverName);
 	Server deleteServer(Long id);
 
 }

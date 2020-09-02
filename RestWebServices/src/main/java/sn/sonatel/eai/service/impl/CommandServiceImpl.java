@@ -1,5 +1,6 @@
 package sn.sonatel.eai.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.exceptions.CommandNotFoundException;
+import sn.sonatel.eai.models.Action;
 import sn.sonatel.eai.models.Command;
 import sn.sonatel.eai.repositories.CommandRepository;
 import sn.sonatel.eai.service.CommandService;
@@ -29,8 +31,13 @@ public class CommandServiceImpl implements CommandService{
 
 	
 	@Override
-	public List<Command> readCommands() {
-		return commandRepository.findAll(Sort.by(Sort.Direction.ASC, "commandName"));
+	public List<Command> readCommands(String commandName) {
+		if (commandName == null) {
+			return commandRepository.findAll(Sort.by(Sort.Direction.ASC, "commandName"));			
+		}
+		List<Command> commands = new ArrayList<>();
+		commandRepository.findByCommandNameContaining(commandName).forEach(commands::add);
+		return commands;
 	}
 	
 

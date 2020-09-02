@@ -1,0 +1,39 @@
+{ 
+    "title": "Action",
+    "entity": "Action",
+    "api": {
+      "url": "http://localhost:8081/actions"
+    },
+    "filter": [
+      "actionName"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "label": "Id",
+        "isId": true,
+        "readonly": true,
+        "type": "number"
+      },
+      {
+        "name": "actionName",
+        "type": "string",
+        "label": "Action"
+      },
+      {
+        "name": "descAction",
+        "type": "string",
+        "label": "Description"
+      },
+      {
+        "name": "processes",
+        "type": "Process[]",
+        "label": "Processes"
+      },
+		{
+		"name": "commands",
+		"type": "Command",
+		"label": "Command"
+		}
+    ]
+}

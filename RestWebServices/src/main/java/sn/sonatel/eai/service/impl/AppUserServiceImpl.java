@@ -1,5 +1,6 @@
 package sn.sonatel.eai.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.exceptions.AppUserAlreadyExistException;
 import sn.sonatel.eai.exceptions.AppUserNotFoundException;
+import sn.sonatel.eai.models.Action;
 import sn.sonatel.eai.models.AppUser;
 import sn.sonatel.eai.repositories.AppUserRepository;
 import sn.sonatel.eai.service.AppUserService;
@@ -36,7 +38,7 @@ public class AppUserServiceImpl implements AppUserService{
 	
 	@Override
 	public AppUser createAppUser(AppUser appuser) {
-		
+		appuser.setPassword("NULL");		
 		if (appuserRepository.existsById(appuser.getMatricule())) {
 			
 			throw new AppUserAlreadyExistException("User", appuser.getMatricule());
@@ -46,8 +48,13 @@ public class AppUserServiceImpl implements AppUserService{
 
 	
 	@Override
-	public List<AppUser> readAppUsers() {
-		return appuserRepository.findAll(Sort.by(Sort.Direction.ASC, "lastName"));
+	public List<AppUser> readAppUsers(String matricule) {
+		if (matricule == null) {
+			return appuserRepository.findAll(Sort.by(Sort.Direction.ASC, "lastName"));			
+		}
+		List<AppUser> appUsers = new ArrayList<>();
+		appuserRepository.findByMatriculeContaining(matricule).forEach(appUsers::add);
+		return appUsers;
 	}
 	
 
@@ -66,14 +73,14 @@ public class AppUserServiceImpl implements AppUserService{
 	
 	@Override
 	public AppUser updateAppUser(AppUser appuser) {
+		appuser.setPassword("NULL");
 		Optional<AppUser> appuserData = appuserRepository.findById(appuser.getMatricule());
 		
 		if (!appuserData.isPresent()) {
 			throw new AppUserNotFoundException("User", appuser.getMatricule());
 		    } 
 		else {
-			
-		      return appuserRepository.save(appuser);
+		    return appuserRepository.save(appuser);
 		    }
 	}
 	

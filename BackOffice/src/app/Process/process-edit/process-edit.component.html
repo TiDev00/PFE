@@ -1,0 +1,46 @@
+<ol class="breadcrumb float-right">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item active">Process</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Process Detail</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="process" #editForm="ngForm" (ngSubmit)="save()">
+    
+      <div class="form-group">
+        <label>Id</label>
+        {{process.id || 'n/a'}} 
+      </div>
+    
+      <div class="form-group">
+        <label for="processName">Process Name</label>
+        <input [(ngModel)]="process.processName" id="processName" name="processName" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="descProcess">Description</label>
+        <input [(ngModel)]="process.descProcess" id="descProcess" name="descProcess" class="form-control">
+      </div>
+    
+      <div class="form-group">
+        <label for="application">Application</label>
+        <select [(ngModel)]="process.application" id="application" name="application" class="form-control" required>
+          <option *ngFor="let loaded of loadedApplications" [ngValue]="loaded.id">{{loaded.appName}}</option>
+        </select>
+      </div>
+    
+      <div class="form-group">
+        <label for="server">Server</label>
+        <select [(ngModel)]="process.server" id="server" name="server" class="form-control" required>
+          <option *ngFor="let loaded of loadedServers" [ngValue]="loaded.id">{{loaded.serverName}}</option>
+        </select>
+      </div>
+    
+      <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

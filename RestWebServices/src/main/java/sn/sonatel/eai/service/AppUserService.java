@@ -9,7 +9,7 @@ public interface AppUserService {
 	AppUser createAppUser(AppUser appuser);
 	AppUser updateAppUser(AppUser appuser);
 	AppUser readAppUser(String matricule);
-	List<AppUser> readAppUsers();
+	List<AppUser> readAppUsers(String matricule);
 	AppUser deleteAppUser(String matricule);
 	
 	AppUser findByMatricule(String matricule);

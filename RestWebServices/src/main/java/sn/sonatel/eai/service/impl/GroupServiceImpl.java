@@ -1,5 +1,6 @@
 package sn.sonatel.eai.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.exceptions.GroupNotFoundException;
+import sn.sonatel.eai.models.Action;
 import sn.sonatel.eai.models.Group;
 import sn.sonatel.eai.repositories.GroupRepository;
 import sn.sonatel.eai.service.GroupService;
@@ -29,8 +31,13 @@ public class GroupServiceImpl implements GroupService {
 
 	
 	@Override
-	public List<Group> readGroups() {
-		return groupRepository.findAll(Sort.by(Sort.Direction.ASC, "serviceName"));
+	public List<Group> readGroups(String serviceName) {
+		if (serviceName == null) {
+			return groupRepository.findAll(Sort.by(Sort.Direction.ASC, "serviceName"));			
+		}
+		List<Group> services = new ArrayList<>();
+		groupRepository.findByServiceNameContaining(serviceName).forEach(services::add);
+		return services;
 	}
 	
 

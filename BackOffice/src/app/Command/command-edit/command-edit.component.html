@@ -1,0 +1,47 @@
+<ol class="breadcrumb float-right">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item active">Command</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Command Detail</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="command" #editForm="ngForm" (ngSubmit)="save()">
+    
+      <div class="form-group">
+        <label>Id</label>
+        {{command.id || 'n/a'}} 
+      </div>
+    
+      <div class="form-group">
+        <label for="commandName">Command</label>
+        <input [(ngModel)]="command.commandName" id="commandName" name="commandName" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="forStatus">For Status</label>
+        <select [(ngModel)]="command.forStatus" id="forStatus" name="forStatus" class="form-control" required>
+          <option [value]="0">NO</option>
+          <option [value]="1">YES</option>
+        </select>
+      </div>
+    
+      <div class="form-group">
+        <label for="descCommand">Description</label>
+        <input [(ngModel)]="command.descCommand" id="descCommand" name="descCommand" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="actions">Action Owner</label>
+        <select [(ngModel)]="command.actions" id= "actions" name="actions" class="form-control" required>
+          <option *ngFor="let loaded of loadedActions" [ngValue]="loaded.id">{{loaded.actionName}}</option>
+        </select>
+      </div>
+    
+      <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

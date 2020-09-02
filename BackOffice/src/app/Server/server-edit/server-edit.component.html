@@ -1,0 +1,47 @@
+<ol class="breadcrumb float-right">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item active">Server</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Server Detail</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="server" #editForm="ngForm" (ngSubmit)="save()">
+    
+      <div class="form-group">
+        <label>Id</label>
+        {{server.id || 'n/a'}} 
+      </div>
+    
+      <div class="form-group">
+        <label for="serverName">Server Name</label>
+        <input [(ngModel)]="server.serverName" id="serverName" name="serverName" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="ipServer">IP Server</label>
+        <input [(ngModel)]="server.ipServer" id="ipServer" name="ipServer" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="osServer">OS Server</label>
+        <input [(ngModel)]="server.osServer" id="osServer" name="osServer" class="form-control">
+      </div>
+    
+      <div class="form-group">
+        <label for="login">Login</label>
+        <input [(ngModel)]="server.login" id="login" name="login" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input [(ngModel)]="server.password" id="password" name="password" class="form-control" required>
+      </div>
+    
+      <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

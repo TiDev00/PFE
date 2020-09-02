@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,8 +36,8 @@ public class ActionController {
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<Action> readActions() {
-		return actionService.readActions();		
+	public List<Action> readActions(@RequestParam(required = false) String actionName) {
+		return actionService.readActions(actionName);		
 	}
 	
 	

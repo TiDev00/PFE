@@ -9,7 +9,7 @@ public interface CommandService {
 	Command createCommand(Command command);
 	Command updateCommand(Command command);
 	Command readCommand(Long id);
-	List<Command> readCommands();
+	List<Command> readCommands(String commandName);
 	Command deleteCommand(Long id);
 
 

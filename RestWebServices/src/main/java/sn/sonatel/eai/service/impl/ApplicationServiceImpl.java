@@ -1,5 +1,6 @@
 package sn.sonatel.eai.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.exceptions.ApplicationNotFoundException;
+import sn.sonatel.eai.models.Action;
 import sn.sonatel.eai.models.Application;
 import sn.sonatel.eai.repositories.ApplicationRepository;
 import sn.sonatel.eai.service.ApplicationService;
@@ -29,9 +31,15 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	
 	@Override
-	public List<Application> readApplications() {
-		return applicationRepository.findAll(Sort.by(Sort.Direction.ASC, "appName"));
+	public List<Application> readApplications(String appName) {
+		if (appName == null) {
+			return applicationRepository.findAll(Sort.by(Sort.Direction.ASC, "appName"));			
+		}
+		List<Application> applications = new ArrayList<>();
+		applicationRepository.findByAppNameContaining(appName).forEach(applications::add);
+		return applications;
 	}
+	
 	
 
 	@Override

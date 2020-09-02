@@ -1,5 +1,6 @@
 package sn.sonatel.eai.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +30,15 @@ public class ActionServiceImpl implements ActionService{
 
 	
 	@Override
-	public List<Action> readActions() {
-		return actionRepository.findAll(Sort.by(Sort.Direction.ASC, "actionName"));
+	public List<Action> readActions(String actionName) {
+		if (actionName == null) {
+			return actionRepository.findAll(Sort.by(Sort.Direction.ASC, "actionName"));			
+		}
+		List<Action> actions = new ArrayList<>();
+		actionRepository.findByActionNameContaining(actionName).forEach(actions::add);
+		return actions;
 	}
+	
 	
 
 	@Override

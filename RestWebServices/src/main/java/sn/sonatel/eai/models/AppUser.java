@@ -6,12 +6,15 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
+
 
 
 import lombok.Data;
@@ -25,33 +28,27 @@ import lombok.Data;
 
 
 @Data
-@Entity    //attribut (name = "") nous permettra de preciser le nom de la classe persistente sinon elle prend le nom de la classe par défaut
-@Table (name = "users")   //    "           "      "       "      "     "     "   "  " la table sql sinon le nom de la classe est pris par défaut
+@Entity    
+@Table (name = "users")
 public class AppUser {
 	
 	@Id
+	@Column
 	private String matricule;
 	
-	@Column(name = "prenom")
+	@Column
 	private String firstName;
 	
-	@Column(name = "nom")
+	@Column
 	private String lastName;
 	
-	@Column
+	@Column(unique = true)
 	private String email;
 	
 	@Column
 	private String password;
 	
-	@OneToOne
-	private Log log;
-	
 	@ManyToOne
 	private Group service;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "users_profiles")
-	private Collection<Profile> profiles = new ArrayList<>();
 	
 }

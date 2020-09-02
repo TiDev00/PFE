@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,8 +39,8 @@ public class AppUserController {
 		
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<AppUser> readAppUsers() {
-		return appuserService.readAppUsers();		
+	public List<AppUser> readAppUsers(@RequestParam(required = false) String matricule) {
+		return appuserService.readAppUsers(matricule);		
 	}
 	
 	//trouver un appuser precis

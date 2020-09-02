@@ -32,19 +32,5 @@ public class LogServiceImpl implements LogService {
 	public List<Log> readLogs() {
 		return logRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
 	}
-	
-
-	@Override
-	public Log readLog(Long id) {
-		Optional<Log> log = logRepository.findById(id);
-		
-		if (!log.isPresent()) {
-			throw new LogNotFoundException("Log", id);
-		    } 
-		else {
-			  return log.get();
-		    }
-	}
-	
 
 }

@@ -9,7 +9,7 @@ public interface GroupService {
 	Group createGroup(Group group);
 	Group updateGroup(Group group);
 	Group readGroup(Long id);
-	List<Group> readGroups();
+	List<Group> readGroups(String serviceName);
 	Group deleteGroup(Long id);
 	
 	

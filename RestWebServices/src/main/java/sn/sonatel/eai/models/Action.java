@@ -29,7 +29,6 @@ public class Action {
 	@Column
 	private String descAction;
 	
-	
 	@ManyToOne
 	@JsonBackReference
 	private Process processes;

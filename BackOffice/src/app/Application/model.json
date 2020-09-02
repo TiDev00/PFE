@@ -1,0 +1,39 @@
+{ 
+    "title": "Application",
+    "entity": "Application",
+    "api": {
+      "url": "http://localhost:8081/applications"
+    },
+    "filter": [
+      "appName"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "label": "Id",
+        "isId": true,
+        "readonly": true,
+        "type": "number"
+      },
+      {
+        "name": "appName",
+        "type": "string",
+        "label": "Name"
+      },
+      {
+        "name": "descApp",
+        "type": "string",
+        "label": "Description"
+      },
+      {
+        "name": "service",
+        "type": "Group",
+        "label": "Service",
+      },
+		{
+		"name": "processes",
+		"type": "Process[]",
+		"label": "Processes"
+		}
+    ]
+}
