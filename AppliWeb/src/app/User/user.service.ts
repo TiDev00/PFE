@@ -11,7 +11,6 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
 export class UserService {
   userList: User[] = [];
   api = `${host}/users`;
-  result;
 
   constructor(private http: HttpClient) {
   }
@@ -43,7 +42,6 @@ export class UserService {
   save(entity: User): Observable<User> {
     let params = new HttpParams();
     let url = '';
-    
     if (entity.matricule) {
       url = `${this.api}/${entity.matricule}`;
       params = new HttpParams().set('matricule', entity.matricule);
@@ -64,6 +62,5 @@ export class UserService {
     }
     return null;
   }
-
 }
 
