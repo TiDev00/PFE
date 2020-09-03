@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent{
 
   constructor(private loginService: LoginService,
-              private router: Router) { }
+              private router: Router,
+              private toast: ToastrService) { }
 
 
   
@@ -26,7 +28,7 @@ export class LoginComponent{
       },
 
       error=>{
-        //this.utils.presentToast("Bad Credentials!",'danger');
+        this.toast.error('Please try again', 'Bad credentials')
       }
     )
   }

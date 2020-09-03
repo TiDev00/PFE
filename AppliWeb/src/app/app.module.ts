@@ -21,8 +21,8 @@ import { HttpInterceptorService } from './http-interceptor.service';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from './login/login.service';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr'
 
 
 
@@ -39,7 +39,13 @@ import { LoginService } from './login/login.service';
     ApplicationModule,
     ActionModule,
     LogModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      progressBar: true,
+      progressAnimation: 'increasing'
+    })
   ],
   declarations: [
     AppComponent,

@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from './login/login.service';
+import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -10,7 +13,9 @@ import { LoginService } from './login/login.service';
 })
 export class HttpInterceptorService implements HttpInterceptor{
 
-  constructor(private loginService: LoginService) { }
+  constructor(private toast: ToastrService,
+              private loginService: LoginService,
+              private router: Router) { }
     
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>>{
@@ -51,14 +56,15 @@ export class HttpInterceptorService implements HttpInterceptor{
         if (error.status === 403) {
           return this.handle403Error(error)
         }
-      
         return throwError(error)
       })
     )
   }
 
   handle403Error(error){
-    
+    if (this.router.url !== '/login'){
+      this.toast.warning('Log out and connect again', 'Token has expired')
+    }
     return throwError(error)
   }
 }
