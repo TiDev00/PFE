@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../user';
 import { map, switchMap } from 'rxjs/operators';
-import { of, Observable, BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { Group } from 'src/app/group/group';
 
 @Component({
@@ -17,8 +17,6 @@ export class UserEditComponent implements OnInit {
   user: User;
   feedback: any = {};
   loadedServices: Group[];
-
-  isOnUpdate$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,

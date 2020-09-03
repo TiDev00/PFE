@@ -13,8 +13,6 @@ export class UserService {
   userList: User[] = [];
   api = `${host}/users`;
 
-  private onUpdate = new BehaviorSubject<boolean>(false);
-
   constructor(private http: HttpClient,
               private router: Router) {
   }
@@ -69,12 +67,5 @@ export class UserService {
     return null;
   }
 
-  get isOnUpdate(){
-    if (location.pathname !== '/users/new'){
-      return this.onUpdate.asObservable()
-    }
-    this.onUpdate.next(true)
-    return this.onUpdate.asObservable()
-  }
 }
 
