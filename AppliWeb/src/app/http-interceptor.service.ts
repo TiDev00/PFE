@@ -3,7 +3,6 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { LoginService } from './login/login.service';
 import { Router } from '@angular/router';
 
 
@@ -13,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class HttpInterceptorService implements HttpInterceptor{
 
+
   constructor(private toast: ToastrService,
-              private loginService: LoginService,
               private router: Router) { }
     
 

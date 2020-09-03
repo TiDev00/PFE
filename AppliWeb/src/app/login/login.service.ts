@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { host } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 
@@ -12,9 +11,7 @@ export class LoginService {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  
-  constructor(private http: HttpClient,
-              private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   get isLoggedIn(){
     let token = localStorage.getItem('token')
@@ -22,7 +19,6 @@ export class LoginService {
       this.loggedIn.next(true)
       return this.loggedIn.asObservable()
     }
-    this.loggedIn.next(false)
     return this.loggedIn.asObservable()
   }
 
