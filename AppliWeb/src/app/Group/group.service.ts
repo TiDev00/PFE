@@ -2,10 +2,9 @@ import { Group } from './group';
 import { GroupFilter } from './group-filter';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { host } from 'src/environments/environment';
 
-const headers = new HttpHeaders().set('Accept', 'application/json');
 
 @Injectable()
 export class GroupService {
@@ -18,7 +17,7 @@ export class GroupService {
   findById(id: string): Observable<Group> {
     const url = `${this.api}/${id}`;
     const params = { id: id };
-    return this.http.get<Group>(url, {params, headers});
+    return this.http.get<Group>(url, {params});
   }
 
   load(filter: GroupFilter): void {
@@ -36,7 +35,7 @@ export class GroupService {
       'serviceName': filter.serviceName,
     };
 
-    return this.http.get<Group[]>(this.api, {params, headers});
+    return this.http.get<Group[]>(this.api, {params});
   }
 
   save(entity: Group): Observable<Group> {
@@ -45,10 +44,10 @@ export class GroupService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.put<Group>(url, entity, {headers, params});
+      return this.http.put<Group>(url, entity, {params});
     } else {
       url = `${this.api}`;
-      return this.http.post<Group>(url, entity, {headers, params});
+      return this.http.post<Group>(url, entity, {params});
     }
   }
 
@@ -58,7 +57,7 @@ export class GroupService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.delete<Group>(url, {headers, params});
+      return this.http.delete<Group>(url, {params});
     }
     return null;
   }

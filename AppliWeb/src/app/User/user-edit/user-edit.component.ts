@@ -18,6 +18,7 @@ export class UserEditComponent implements OnInit {
   feedback: any = {};
   loadedServices: Group[];
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -44,7 +45,8 @@ export class UserEditComponent implements OnInit {
         }
       );
 
-      this.loadedServices = this.route.snapshot.data['services'];
+      this.loadedServices = this.route.snapshot.data['services']
+
   }
 
   save() {

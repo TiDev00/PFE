@@ -2,14 +2,13 @@ import { Log } from './log';
 import { LogFilter } from './log-filter';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
-const headers = new HttpHeaders().set('Accept', 'application/json');
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { host } from 'src/environments/environment';
 
 @Injectable()
 export class LogService {
   logList: Log[] = [];
-  api = 'http://localhost:8081/logs';
+  api = `${host}/logs`;
 
   constructor(private http: HttpClient) {
   }
@@ -17,7 +16,7 @@ export class LogService {
   findById(id: string): Observable<Log> {
     const url = `${this.api}/${id}`;
     const params = { id: id };
-    return this.http.get<Log>(url, {params, headers});
+    return this.http.get<Log>(url, {params});
   }
 
   load(filter: LogFilter): void {
@@ -35,7 +34,7 @@ export class LogService {
       'user': filter.user,
     };
 
-    return this.http.get<Log[]>(this.api, {params, headers});
+    return this.http.get<Log[]>(this.api, {params});
   }
 
   save(entity: Log): Observable<Log> {
@@ -44,10 +43,10 @@ export class LogService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.put<Log>(url, entity, {headers, params});
+      return this.http.put<Log>(url, entity, {params});
     } else {
       url = `${this.api}`;
-      return this.http.post<Log>(url, entity, {headers, params});
+      return this.http.post<Log>(url, entity, {params});
     }
   }
 
@@ -57,7 +56,7 @@ export class LogService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.delete<Log>(url, {headers, params});
+      return this.http.delete<Log>(url, {params});
     }
     return null;
   }

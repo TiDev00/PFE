@@ -2,14 +2,15 @@ import { Command } from './command';
 import { CommandFilter } from './command-filter';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { host } from 'src/environments/environment';
 
-const headers = new HttpHeaders().set('Accept', 'application/json');
+
 
 @Injectable()
 export class CommandService {
   commandList: Command[] = [];
-  api = 'http://localhost:8081/commands';
+  api = `${host}/commands`;
 
   constructor(private http: HttpClient) {
   }
@@ -17,7 +18,7 @@ export class CommandService {
   findById(id: string): Observable<Command> {
     const url = `${this.api}/${id}`;
     const params = { id: id };
-    return this.http.get<Command>(url, {params, headers});
+    return this.http.get<Command>(url, {params});
   }
 
   load(filter: CommandFilter): void {
@@ -35,7 +36,7 @@ export class CommandService {
       'commandName': filter.commandName,
     };
 
-    return this.http.get<Command[]>(this.api, {params, headers});
+    return this.http.get<Command[]>(this.api, {params});
   }
 
   save(entity: Command): Observable<Command> {
@@ -44,10 +45,10 @@ export class CommandService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.put<Command>(url, entity, {headers, params});
+      return this.http.put<Command>(url, entity, {params});
     } else {
       url = `${this.api}`;
-      return this.http.post<Command>(url, entity, {headers, params});
+      return this.http.post<Command>(url, entity, {params});
     }
   }
 
@@ -57,7 +58,7 @@ export class CommandService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.delete<Command>(url, {headers, params});
+      return this.http.delete<Command>(url, {params});
     }
     return null;
   }

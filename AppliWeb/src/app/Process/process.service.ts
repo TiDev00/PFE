@@ -2,10 +2,10 @@ import { Process } from './process';
 import { ProcessFilter } from './process-filter';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { host } from 'src/environments/environment';
 
-const headers = new HttpHeaders().set('Accept', 'application/json');
+
 
 @Injectable()
 export class ProcessService {
@@ -18,7 +18,7 @@ export class ProcessService {
   findById(id: string): Observable<Process> {
     const url = `${this.api}/${id}`;
     const params = { id: id };
-    return this.http.get<Process>(url, {params, headers});
+    return this.http.get<Process>(url, {params});
   }
 
   load(filter: ProcessFilter): void {
@@ -36,7 +36,7 @@ export class ProcessService {
       'processName': filter.processName,
     };
 
-    return this.http.get<Process[]>(this.api, {params, headers});
+    return this.http.get<Process[]>(this.api, {params});
   }
 
   save(entity: Process): Observable<Process> {
@@ -45,10 +45,10 @@ export class ProcessService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.put<Process>(url, entity, {headers, params});
+      return this.http.put<Process>(url, entity, {params});
     } else {
       url = `${this.api}`;
-      return this.http.post<Process>(url, entity, {headers, params});
+      return this.http.post<Process>(url, entity, {params});
     }
   }
 
@@ -58,7 +58,7 @@ export class ProcessService {
     if (entity.id) {
       url = `${this.api}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.delete<Process>(url, {headers, params});
+      return this.http.delete<Process>(url, {params});
     }
     return null;
   }
