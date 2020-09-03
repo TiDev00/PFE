@@ -82,13 +82,13 @@ export class UserEditComponent implements OnInit {
     this.userService.update(JSON.parse(strObject)).subscribe(
       user => {
         this.user = user;
-        this.feedback = {type: 'success', message: 'Save was successful!'};
+        this.feedback = {type: 'success', message: 'Update was successful!'};
         setTimeout(() => {
           this.router.navigate(['/users']);
         }, 1000);
       },
       err => {
-        this.feedback = {type: 'warning', message: 'Error saving'};
+        this.feedback = {type: 'warning', message: 'User does not exist'};
       }
     );
   }
