@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Application } from '../models/application';
 
 
+
 @Component({
   selector: 'app-applications',
   templateUrl: './applications.page.html',

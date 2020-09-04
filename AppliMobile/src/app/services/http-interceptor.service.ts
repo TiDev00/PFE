@@ -47,7 +47,7 @@ export class HttpInterceptorService implements HttpInterceptor{
         if (event instanceof HttpResponse) {
           console.log('event--->>>', event);
         }
-        this.utils.dismissLoader()
+        this.utils.dismissAllLoaders()
         return event
       }),
       
@@ -55,16 +55,16 @@ export class HttpInterceptorService implements HttpInterceptor{
         if (error.status === 403) {
           return this.handle403Error(error)
         }
-        this.utils.dismissLoader() 
+        this.utils.dismissAllLoaders() 
         return throwError(error)
       })
     )
   }
 
   handle403Error(error){
-    this.utils.presentToast('Forbidden access. Try to reconnect!','danger')
+    this.utils.presentToast('Token has expired. Reconnect again','warning')
     this.authenticationService.logout()
-    this.utils.dismissLoader()
+    this.utils.dismissAllLoaders()
     return throwError(error)
   }
 }
