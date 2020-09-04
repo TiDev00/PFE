@@ -71,7 +71,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			 * logService.createLog(log);
 			 */
 			
-			if(!isMemberOfSonatel(appUser.getMatricule(), appUser.getPassword())) {
+			if(isMemberOfSonatel(appUser.getMatricule(), appUser.getPassword())) {
 				
 				return authenticationManager
 						.authenticate(
