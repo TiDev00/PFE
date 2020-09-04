@@ -1,0 +1,21 @@
+<div class="content">
+
+  <swiper [config]="config">
+
+    <div class="swiper-wrapper">
+  
+      <div class="swiper-slide" *ngFor="let slide of img">
+        <img src="../../assets/img/orange/{{slide.name}}.PNG" />
+      </div>
+  
+    </div>
+  
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  
+  </swiper>
+  
+</div>
+
+
+

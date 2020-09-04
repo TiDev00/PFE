@@ -1,0 +1,68 @@
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <div class="simple-text">
+      Orange Support
+    </div>
+  </div>
+
+  <ul class="nav" *ngIf="isLoggedIn$ | async" @fade>
+
+    <li>
+      <a routerLink="home">
+        <i class="ti-home"></i>
+        <p>Home</p>
+      </a>
+    </li>
+
+
+    <li>
+      <a routerLink="actions">
+        <i class="ti-check-box"></i>
+        <p>Actions</p>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="applications">
+        <i class="ti-tablet"></i>
+        <p>Applications</p>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="commands">
+        <i class="ti-panel"></i>
+        <p>Commands</p>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="processes">
+        <i class="ti-pulse"></i>
+        <p>Processes</p>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="servers">
+        <i class="ti-server"></i>
+        <p>Servers</p>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="groups">
+        <i class="ti-bag"></i>
+        <p>Services</p>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="users">
+        <i class="ti-user"></i>
+        <p>Users</p>
+      </a>
+    </li>
+
+  </ul>
+</div>
