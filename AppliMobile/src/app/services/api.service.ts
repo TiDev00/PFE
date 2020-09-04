@@ -24,6 +24,6 @@ export class ApiService {
   }
 
   getUser(login){
-    return this.http.get(`${apiUrl}/user/`+login)
+    return this.http.get(`${apiUrl}/users/`+login)
   }
 }
