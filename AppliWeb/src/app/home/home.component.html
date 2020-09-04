@@ -1,14 +1,21 @@
-<ol class="breadcrumb float-right">
-  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-</ol>
+<div class="content">
 
-  <div class="header">
-    <h1 class="title">Welcome on Orange Support</h1>
-  </div>
+  <swiper [config]="config">
 
-  <div class="content">
-    
-  </div>
+    <div class="swiper-wrapper">
+  
+      <div class="swiper-slide" *ngFor="let slide of img">
+        <img src="../../assets/img/orange/{{slide.name}}.PNG" />
+      </div>
+  
+    </div>
+  
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  
+  </swiper>
+  
+</div>
 
 
 

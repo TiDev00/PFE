@@ -21,7 +21,9 @@
     "@angular/router": "^8.2.14",
     "core-js": "^3.4.2",
     "ngx-toastr": "^10.0.4",
+    "ngx-useful-swiper": "^8.0.1",
     "rxjs": "^6.5.3",
+    "swiper": "^5.4.5",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "~12.12.11",
+    "@types/swiper": "^5.4.0",
     "angular-crud": "1.0.0",
     "codelyzer": "~5.2.0",
     "jasmine-core": "~3.5.0",

@@ -22,7 +22,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from './login/login.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr'
+import { ToastrModule } from 'ngx-toastr';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 
 
 
@@ -40,6 +41,7 @@ import { ToastrModule } from 'ngx-toastr'
     ActionModule,
     LogModule,
     FormsModule,
+    NgxUsefulSwiperModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,

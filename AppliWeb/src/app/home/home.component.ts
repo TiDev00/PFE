@@ -1,25 +1,42 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  constructor(
-    private route: ActivatedRoute) {
-  }
+  img = [
+    {
+      name: "img1",
+    }, {
+      name: "img2",
+    }, {
+      name: "img3",
+    }, {
+      name: "img4",
+    }, {
+      name: "img5",
+    }
+  ]
 
-  
-
-  ngOnInit() {
-    
-  }
-
-  
-
+  config: SwiperOptions = {
+    pagination: { el: '.swiper-pagination', clickable: true },
+    autoHeight: true,
+    allowTouchMove: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: true
+    },
+    /* effect: {"slide", "fade", "cube", "coverflow", "flip"}, */
+    breakpoints: {
+      300: {
+        slidesPerView: 1
+      }
+    },
+    loop: true
+  };
 
 }
