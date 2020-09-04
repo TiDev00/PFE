@@ -30,7 +30,10 @@ export class HomeComponent {
       delay: 3000,
       disableOnInteraction: true
     },
-    /* effect: {"slide", "fade", "cube", "coverflow", "flip"}, */
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true
+    },
     breakpoints: {
       300: {
         slidesPerView: 1
