@@ -52,7 +52,7 @@ export class PopOverComponent implements OnInit {
       },
 
       error=>{
-        this.utils.presentToast("Error in servor",'danger');
+        this.utils.presentToast("Error in server",'danger');
       }
     )
   }

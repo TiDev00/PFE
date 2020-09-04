@@ -30,16 +30,19 @@ export class UtilsService {
       // duration: 5000,
     }).then(a => {
       a.present().then(() => {
-        // console.log('presented');
         if (!this.isLoading) {
-          a.dismiss()/* .then(() => console.log('abort presenting')) */;
-        }
+          a.dismiss()}
       });
     });
   }
 
-  async dismissLoader() {
-    this.isLoading = false;
-    return await this.loadingController.dismiss()/* .then(() => console.log('dismissed')) */;
-  } 
+  async dismissAllLoaders() {
+    let topLoader = await this.loadingController.getTop();
+    while (topLoader) {
+      if (!(await topLoader.dismiss())) {
+        throw new Error('Could not dismiss the topmost loader. Aborting...');
+      }
+      topLoader = await this.loadingController.getTop();
+    }
+  }
 }
