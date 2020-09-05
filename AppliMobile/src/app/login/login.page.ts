@@ -27,6 +27,7 @@ export class LoginPage {
       },
 
       error=>{
+        this.utils.dismissAllLoaders()
         this.utils.presentToast("Bad Credentials!",'danger');
       }
     )
