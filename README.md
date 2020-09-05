@@ -6,7 +6,9 @@ Le dossier RestWebServices contient les webservices utilisés par l'application 
 
 #### Build & Run
 Pour build l'application il faut:
-  * Aller dans le ficher application.properties et modifier les paramètres vers la bdd et potentiellement le numéro de server
+  * Démarrer le XAMPP ensuite démarre les serveurs Apache et MySQL
+  * Aller dans le ficher application.properties se trouvant dans src/main/resources et modifier les paramètres vers la bdd
+    et potentiellement le numéro de port du server
     ```
     > spring.datasource.url = jdbc:mysql://127.0.0.1:3306/sonatel_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     > spring.datasource.username=root
