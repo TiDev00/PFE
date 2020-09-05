@@ -59,7 +59,7 @@ export class HttpInterceptorService implements HttpInterceptor{
   }
 
   handle403Error(error){
-    this.utils.presentToast('Token has expired. Reconnect again','warning')
+    this.utils.presentToast('Token has expired. Connect again','warning')
     this.authenticationService.logout()
     return throwError(error)
   }

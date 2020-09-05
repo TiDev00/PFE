@@ -17,7 +17,7 @@ export class UtilsService {
       message: message,
       position: 'top',
       color: color,
-      duration: 3000
+      duration: 2000
     })
     toast.present();
   }

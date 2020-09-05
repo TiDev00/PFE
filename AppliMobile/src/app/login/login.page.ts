@@ -26,7 +26,6 @@ export class LoginPage {
         this.authenticationService.saveToken(jwtToken);
         this.router.navigateByUrl('/applications');
         this.utils.dismissAllLoaders()
-
       },
 
       error=>{
