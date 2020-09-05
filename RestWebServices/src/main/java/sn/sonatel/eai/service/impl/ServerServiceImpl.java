@@ -30,11 +30,10 @@ public class ServerServiceImpl implements ServerService {
 	
 	private static final Logger LOGGER = Logger.getLogger(ServerServiceImpl.class.getName());
 	
+	String filePath = "C:/Users/stg_cisse50339/Desktop/myfile.txt";
 	
 	@Override
 	public Server createServer(Server server) {
-		
-		String filePath = "C:/Users/stg_cisse50339/Desktop/myfile.txt";
 		
 		String serverName = server.getServerName();
 		
@@ -84,6 +83,25 @@ public class ServerServiceImpl implements ServerService {
 	
 	@Override
 	public Server updateServer(Server server) {
+		
+		String serverName = server.getServerName();
+		
+		String ipServer = server.getIpServer();
+		
+		String login = server.getLogin();
+		
+		String password = server.getPassword();
+		
+		try (PrintWriter writer = new PrintWriter(new BufferedWriter((new FileWriter(filePath, true))))){
+			writer.println();
+			writer.println("[" + serverName + "]");
+			writer.println(ipServer + " ansible_user=" + login + " ansible_password=" + password);
+		}
+		catch(IOException e) {
+			LOGGER.log(Level.WARNING, "Impossible to write in the inventory file");
+			throw new RuntimeException(e);
+		}
+		
 		Optional<Server> serverData = serverRepository.findById(server.getId());
 		
 		if (!serverData.isPresent()) {

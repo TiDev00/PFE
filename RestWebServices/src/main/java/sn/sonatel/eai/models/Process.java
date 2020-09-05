@@ -27,17 +27,17 @@ public class Process {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String processName;
 	
 	@Column
 	private String descProcess;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JsonBackReference
 	private Application application;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Server server;
 	
 	@OneToMany(mappedBy = "processes",fetch = FetchType.EAGER)

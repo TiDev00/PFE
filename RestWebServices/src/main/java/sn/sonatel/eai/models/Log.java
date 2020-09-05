@@ -22,7 +22,7 @@ public class Log {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
+	@OneToOne(optional = false)
 	private AppUser user;	
 	
 	@Column(updatable = false, nullable = false)

@@ -33,16 +33,16 @@ public class Command {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String commandName;
 	
 	@Column
 	private String descCommand;
 	
-	@Column
+	@Column(nullable = false)
 	private StatusType forStatus;
 	
-	@OneToOne
+	@OneToOne(optional = false)
 	@JsonBackReference
 	private Action actions;
 	

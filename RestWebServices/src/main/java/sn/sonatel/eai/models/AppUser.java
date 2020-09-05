@@ -26,7 +26,7 @@ import lombok.Data;
 public class AppUser {
 	
 	@Id
-	@Column(unique = true)
+	@Column(unique = true, updatable = false, nullable = false)
 	private String matricule;
 	
 	@Column
@@ -41,7 +41,7 @@ public class AppUser {
 	@Column
 	private String password;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Group service;
 	
 }
