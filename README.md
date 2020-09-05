@@ -6,7 +6,7 @@ Le dossier RestWebServices contient les webservices utilisés par l'application 
 
 #### Build & Run
 Pour build l'application il faut:
-  * Démarrer le XAMPP ensuite démarre les serveurs Apache et MySQL
+  * Démarrer le XAMPP ensuite démarrer les serveurs Apache et MySQL
   * Aller dans le ficher application.properties se trouvant dans src/main/resources et modifier les paramètres vers la bdd
     et potentiellement le numéro de port du server
     ```
