@@ -32,9 +32,6 @@ public class ExecuteCommandServiceImpl implements ExecuteCommandService{
 		String forstatus = requete.getForStatus();
 
 
-		String ansibleCmd = "ansible " + serverName + " -m shell -a '" + commandName + "'";
-		
-
 		//String ansibleCmd = "ansible " + serverName + " -m shell -a '" + commandName + "'";
 		
 		String cmdTest = commandName +" "+ serverName; 
@@ -43,10 +40,10 @@ public class ExecuteCommandServiceImpl implements ExecuteCommandService{
         ProcessBuilder processBuilder = new ProcessBuilder();
 
         if (isWindows) {
-            processBuilder.command("cmd", "/c", ansibleCmd);
+            processBuilder.command("cmd", "/c", cmdTest);
         } 
         else {
-            processBuilder.command("sh", "-c", ansibleCmd);
+            processBuilder.command("sh", "-c", cmdTest);
         }
 
         try {
