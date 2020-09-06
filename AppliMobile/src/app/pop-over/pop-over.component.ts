@@ -36,7 +36,7 @@ export class PopOverComponent implements OnInit {
     .subscribe(
       data=>{
         this.response = data
-        this.utils.dismissAllLoaders()
+        this.utils.dismiss()
         if (this.response.output === null){
           if (this.response.traitement === 'OK'){
             this.utils.presentToast("Task successfully completed",'success')
@@ -56,7 +56,7 @@ export class PopOverComponent implements OnInit {
       },
 
       error=>{
-        this.utils.dismissAllLoaders();
+        this.utils.dismiss();
         this.utils.presentToast("Error in server",'danger')
       }
     )
