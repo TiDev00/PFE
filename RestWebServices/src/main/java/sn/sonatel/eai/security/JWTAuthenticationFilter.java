@@ -69,7 +69,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			 * logService.createLog(log);
 			 */
 			
-			if(isMemberOfSonatel(appUser.getMatricule(), appUser.getPassword())) {
+			if(!isMemberOfSonatel(appUser.getMatricule(), appUser.getPassword())) {
 				
 				return authenticationManager
 						.authenticate(
@@ -79,7 +79,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 								);
 			}
 			
-			throw new RuntimeException();
+			throw new RuntimeException("Utilisateur LDAP Absent");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
