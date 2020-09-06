@@ -45,11 +45,18 @@ Pour build l'application mobile il faut suivre les étapes suivantes:
     > ionic capacitor add ios 
     ```
 Pour run l'application il faudra:
-  * Copier le dossier asset en utilisant la commande 
-    ```
-    > ionic capacitor copy android 
-    ```
-  * Enfin Ouvrir le dossier android/app généré par le build à l'aide de Android Studio attendre la configuration automatique
+  * Ouvrir le dossier android/app généré par le build à l'aide de Android Studio attendre la configuration automatique
+  * Aller dans le dossier manifests puis ouvrir le fichier AndroidManifest.xml
+  * Dans la balise application il faut:
+    ** Supprimer la propriété suivante si elle existe
+       ```
+       > android:networkSecurityConfig="@xml/network_security_config"
+       ```
+    ** Ajouter la propriété suivante:
+       ```
+       > android:usesCleartextTraffic="true"
+       ```
+  * Sauvegarder et fermer
   * Cliquer sur Run et choisir notre terminal de déploiement
   * Une fois l'application en marche, entrer un login(matricule) présent à la fois dans notre bdd ainsi que la LDAP.
     Il faut saisir le bon password dans la LDAP et non le password "NULL" dans la bdd.
