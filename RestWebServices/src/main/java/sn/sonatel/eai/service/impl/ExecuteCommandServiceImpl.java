@@ -32,18 +32,16 @@ public class ExecuteCommandServiceImpl implements ExecuteCommandService{
 		String forstatus = requete.getForStatus();
 
 
-		//String ansibleCmd = "ansible " + serverName + " -m shell -a '" + commandName + "'";
+		String ansibleCmd = "ansible " + serverName + " -m shell -a '" + commandName + "'";
 		
-		String cmdTest = commandName +" "+ serverName; 
-
 
         ProcessBuilder processBuilder = new ProcessBuilder();
 
         if (isWindows) {
-            processBuilder.command("cmd", "/c", cmdTest);
+            processBuilder.command("cmd", "/c", ansibleCmd);
         } 
         else {
-            processBuilder.command("sh", "-c", cmdTest);
+            processBuilder.command("sh", "-c", ansibleCmd);
         }
 
         try {
