@@ -27,19 +27,23 @@ export class PopOverComponent implements OnInit {
   }
 
   envoi(actions){
+    this.utils.presentLoader()
     this.request.serverName = this.process.server.serverName
     this.request.commandName = actions.commands.commandName
-    this.request.Status = actions.commands.forStatus
+    this.request.forStatus = actions.commands.forStatus
 
     this.apiService.postCommand(this.request)
     .subscribe(
       data=>{
         this.response = data
+        this.utils.dismissAllLoaders()
         if (this.response.output === null){
           if (this.response.traitement === 'OK'){
             this.utils.presentToast("Task successfully completed",'success')
           }
-          this.utils.presentToast("Unable to complete task", 'warning')
+          else{
+            this.utils.presentToast("Unable to complete task", 'warning')
+          }
         }
 
         if (this.response.output === '1'){
@@ -52,7 +56,8 @@ export class PopOverComponent implements OnInit {
       },
 
       error=>{
-        this.utils.presentToast("Error in server",'danger');
+        this.utils.dismissAllLoaders();
+        this.utils.presentToast("Error in server",'danger')
       }
     )
   }

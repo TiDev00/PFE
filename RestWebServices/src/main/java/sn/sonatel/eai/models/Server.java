@@ -18,18 +18,18 @@ public class Server {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String serverName;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String ipServer;
 	
 	@Column
 	private String osServer;
 	
-	@Column
+	@Column(nullable = false)
 	private String login;
 	
-	@Column
+	@Column(nullable = false)
 	private String password;
 }

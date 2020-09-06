@@ -18,19 +18,20 @@ export class LoginPage {
 
   onSubmit(user){
 
+    this.utils.presentLoader()
     this.authenticationService.login(user)
     .subscribe(
       Response=>{
         let jwtToken = Response.headers.get('authorization');
         this.authenticationService.saveToken(jwtToken);
-        this.router.navigateByUrl('/applications')
+        this.router.navigateByUrl('/applications');
+        this.utils.dismissAllLoaders()
       },
 
       error=>{
-        this.utils.dismissAllLoaders()
-        this.utils.presentToast("Bad Credentials!",'danger');
+        this.utils.dismissAllLoaders();
+        this.utils.presentToast("Bad Credentials!",'danger')
       }
     )
   }
-
 }

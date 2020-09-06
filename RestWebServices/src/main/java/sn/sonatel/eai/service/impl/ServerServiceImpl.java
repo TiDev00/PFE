@@ -11,12 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.exceptions.ServerNotFoundException;
-import sn.sonatel.eai.models.Action;
 import sn.sonatel.eai.models.Server;
 import sn.sonatel.eai.repositories.ServerRepository;
 import sn.sonatel.eai.service.ServerService;
@@ -30,11 +30,11 @@ public class ServerServiceImpl implements ServerService {
 	
 	private static final Logger LOGGER = Logger.getLogger(ServerServiceImpl.class.getName());
 	
+	@Value("${ansible.inventoryFile.path}")
+	private String filePath;
 	
 	@Override
 	public Server createServer(Server server) {
-		
-		String filePath = "C:/Users/stg_cisse50339/Desktop/myfile.txt";
 		
 		String serverName = server.getServerName();
 		
@@ -84,14 +84,33 @@ public class ServerServiceImpl implements ServerService {
 	
 	@Override
 	public Server updateServer(Server server) {
+		
 		Optional<Server> serverData = serverRepository.findById(server.getId());
 		
 		if (!serverData.isPresent()) {
 			throw new ServerNotFoundException("Server", server.getId());
 		    } 
 		else {
+			String serverName = server.getServerName();
 			
-		      return serverRepository.save(server);
+			String ipServer = server.getIpServer();
+			
+			String login = server.getLogin();
+			
+			String password = server.getPassword();
+			
+			try (PrintWriter writer = new PrintWriter(new BufferedWriter((new FileWriter(filePath, true))))){
+				writer.println();
+				writer.println("[" + serverName + "]");
+				writer.println(ipServer + " ansible_user=" + login + " ansible_password=" + password);
+			}
+			
+			catch(IOException e) {
+				LOGGER.log(Level.WARNING, "Impossible to write in the inventory file");
+				throw new RuntimeException(e);
+			}
+			
+		    return serverRepository.save(server);
 		    }
 	}
 	

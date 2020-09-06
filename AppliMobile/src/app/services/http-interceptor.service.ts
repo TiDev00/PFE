@@ -17,8 +17,6 @@ export class HttpInterceptorService implements HttpInterceptor{
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>>{
 
-    this.utils.presentLoader()
-
     let token = localStorage.getItem('token')
 
     if (token) {
@@ -47,7 +45,6 @@ export class HttpInterceptorService implements HttpInterceptor{
         if (event instanceof HttpResponse) {
           console.log('event--->>>', event);
         }
-        this.utils.dismissAllLoaders()
         return event
       }),
       
@@ -55,16 +52,15 @@ export class HttpInterceptorService implements HttpInterceptor{
         if (error.status === 403) {
           return this.handle403Error(error)
         }
-        this.utils.dismissAllLoaders() 
+        this.utils.presentToast('Unknown error', 'danger')
         return throwError(error)
       })
     )
   }
 
   handle403Error(error){
-    this.utils.presentToast('Token has expired. Reconnect again','warning')
+    this.utils.presentToast('Token has expired. Connect again','warning')
     this.authenticationService.logout()
-    this.utils.dismissAllLoaders()
     return throwError(error)
   }
 }

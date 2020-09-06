@@ -23,13 +23,13 @@ public class Action {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String actionName;
 	
 	@Column
 	private String descAction;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JsonBackReference
 	private Process processes;
 	

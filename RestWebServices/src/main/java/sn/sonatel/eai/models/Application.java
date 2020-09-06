@@ -23,13 +23,13 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String appName;
 	
 	@Column
 	private String descApp;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Group service;
 	
 	@OneToMany(mappedBy = "application",fetch = FetchType.EAGER)
