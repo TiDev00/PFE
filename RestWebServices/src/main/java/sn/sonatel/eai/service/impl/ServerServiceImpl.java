@@ -11,12 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sn.sonatel.eai.exceptions.ServerNotFoundException;
-import sn.sonatel.eai.models.Action;
 import sn.sonatel.eai.models.Server;
 import sn.sonatel.eai.repositories.ServerRepository;
 import sn.sonatel.eai.service.ServerService;
@@ -30,7 +30,8 @@ public class ServerServiceImpl implements ServerService {
 	
 	private static final Logger LOGGER = Logger.getLogger(ServerServiceImpl.class.getName());
 	
-	String filePath = "C:/Users/stg_cisse50339/Desktop/myfile.txt";
+	@Value("${ansible.inventoryFile.path}")
+	private String filePath;
 	
 	@Override
 	public Server createServer(Server server) {
