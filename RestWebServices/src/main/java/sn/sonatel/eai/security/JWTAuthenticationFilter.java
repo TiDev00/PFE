@@ -1,7 +1,6 @@
 package sn.sonatel.eai.security;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +31,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sn.sonatel.eai.models.AppUser;
-import sn.sonatel.eai.models.Log;
 import sn.sonatel.eai.service.LogService;
 
 
