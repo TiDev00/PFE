@@ -25,11 +25,11 @@ export class LoginPage {
         let jwtToken = Response.headers.get('authorization');
         this.authenticationService.saveToken(jwtToken);
         this.router.navigateByUrl('/applications');
-        this.utils.dismissAllLoaders()
+        this.utils.dismiss()
       },
 
       error=>{
-        this.utils.dismissAllLoaders();
+        this.utils.dismiss();
         this.utils.presentToast("Bad Credentials!",'danger')
       }
     )

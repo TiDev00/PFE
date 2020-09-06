@@ -36,13 +36,8 @@ export class UtilsService {
     });
   }
 
-  async dismissAllLoaders() {
-    let topLoader = await this.loadingController.getTop();
-    while (topLoader) {
-      if (!(await topLoader.dismiss())) {
-        throw new Error('Could not dismiss the topmost loader. Aborting...');
-      }
-      topLoader = await this.loadingController.getTop();
-    }
+  async dismiss() {
+    this.isLoading = false;
+    return await this.loadingController.dismiss().then(() => console.log('dismissed'));
   }
 }
