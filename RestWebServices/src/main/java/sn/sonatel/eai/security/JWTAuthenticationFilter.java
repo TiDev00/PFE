@@ -77,7 +77,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 						.authenticate(
 								new UsernamePasswordAuthenticationToken(
 										appUser.getMatricule(),
-										appUser.getPassword()/* "NULL" */)
+										 "NULL")
 								);
 			}
 			

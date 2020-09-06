@@ -73,6 +73,7 @@ public class AppUserServiceImpl implements AppUserService{
 	
 	@Override
 	public AppUser updateAppUser(AppUser appuser) {
+		appuser.setPassword("NULL");
 		Optional<AppUser> appuserData = appuserRepository.findById(appuser.getMatricule());
 		
 		if (!appuserData.isPresent()) {
