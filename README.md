@@ -47,8 +47,8 @@ Pour build l'application mobile il faut suivre les étapes suivantes:
 Pour run l'application il faudra:
   * Ouvrir le dossier android/app généré par le build à l'aide de Android Studio attendre la configuration automatique
   * Aller dans le dossier manifests puis ouvrir le fichier AndroidManifest.xml
-  * Dans la balise application il faut:
-    ** Supprimer la propriété suivante si elle existe
+  * Dans la balise application il faut
+    *Supprimer la propriété suivante si elle existe
        ```
        > android:networkSecurityConfig="@xml/network_security_config"
        ```
