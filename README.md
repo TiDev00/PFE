@@ -55,7 +55,7 @@ Pour run l'application il faudra:
     Il faut saisir le bon password dans la LDAP et non le password "NULL" dans la bdd.
   * Commencer l'exploitation
   
-PS: S'assurer que le chemin contenu dans le fichier src/environnement.ts correspond à notre chemin vers le backend avant de faire la manipulation
+PS: S'assurer que l'url contenu dans le fichier src/environnement.ts correspond à celle qui va vers le backend avant de faire la manipulation
      
 ### BACKOFFICE
 Le dossier backoffice contient la partie web cliente de notre système
