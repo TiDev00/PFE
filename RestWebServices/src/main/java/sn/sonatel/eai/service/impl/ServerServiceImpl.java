@@ -91,8 +91,26 @@ public class ServerServiceImpl implements ServerService {
 			throw new ServerNotFoundException("Server", server.getId());
 		    } 
 		else {
+			String serverName = server.getServerName();
 			
-		      return serverRepository.save(server);
+			String ipServer = server.getIpServer();
+			
+			String login = server.getLogin();
+			
+			String password = server.getPassword();
+			
+			try (PrintWriter writer = new PrintWriter(new BufferedWriter((new FileWriter(filePath, true))))){
+				writer.println();
+				writer.println("[" + serverName + "]");
+				writer.println(ipServer + " ansible_user=" + login + " ansible_password=" + password);
+			}
+			
+			catch(IOException e) {
+				LOGGER.log(Level.WARNING, "Impossible to write in the inventory file");
+				throw new RuntimeException(e);
+			}
+			
+		    return serverRepository.save(server);
 		    }
 	}
 	
